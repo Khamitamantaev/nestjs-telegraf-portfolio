@@ -16,6 +16,9 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "strict": true, //активируем строгий режим типизации(строгая проверка на ноль и any)
+    "strictPropertyInitialization": false,
+    "skipDefaultLibCheck": false
   }
 }
