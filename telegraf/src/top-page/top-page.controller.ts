@@ -1,12 +1,15 @@
 import { FindTopPageDto } from './dto/find-top-page.dto';
 import { TopPageModel } from './model/top-page.model';
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('top-page')
 export class TopPageController {
-    @Post('create')
-    async create(@Body() dto: Omit<TopPageModel, '_id'>) { 
+    constructor(private readonly configService: ConfigService) {}
 
+    @Post('create')
+    async create(@Body() dto: Omit<TopPageModel, '_id'>) {
+        console.log(this.configService.get('TEST'))
     }
 
     @Get(':id')
@@ -21,7 +24,7 @@ export class TopPageController {
 
     @Patch(':id')
     async patch(@Param('id') id: string, @Body() dto: TopPageModel) {
-        
+
     }
 
     @HttpCode(200)
