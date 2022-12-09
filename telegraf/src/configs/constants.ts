@@ -6,5 +6,11 @@ export const APP_CONSTANTS = {
         HOST: 'MONGO_HOST',
         PORT: 'MONGO_PORT',
         DATABASE: 'MONGO_AUTHDATABASE'
+    },
+    COLLECTIONS: {
+        AUTH: 'Auth',
+        PRODUCT: 'Product',
+        REVIEW: 'Review',
+        TOP_PAGE: 'TopPage'
     }
 }
