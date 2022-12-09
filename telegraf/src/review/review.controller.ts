@@ -19,12 +19,10 @@ export class ReviewController {
         if(!deleteDoc) {
             throw new HttpException(REVIEW_NOT_FOUND, HttpStatus.NOT_FOUND)
         }
-
-
     }
 
     @Get('byProduct/:productId')
     async getByProduct(@Param('productId') productId: string) {
-        return this.reviewService.findByProduct(productId)
+        return this.reviewService.findByProductId(productId)
     }
 }
