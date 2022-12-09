@@ -1,3 +1,4 @@
+import { APP_CONSTANTS } from './constants';
 import { ConfigService } from '@nestjs/config';
 import { TypegooseModuleOptions } from 'nestjs-typegoose';
 export const GetMongoConfiguration = async (configService: ConfigService): Promise<TypegooseModuleOptions> => {
@@ -8,12 +9,13 @@ export const GetMongoConfiguration = async (configService: ConfigService): Promi
 }
 // mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb][?options]]
 const getMongoString = (configService: ConfigService) => {
-    const login = configService.get('MONGO_LOGIN')
-    const password = configService.get('MONGO_PASSWORD')
-    const host = configService.get('MONGO_HOST')
-    const port = configService.get('MONGO_PORT')
-    const database = configService.get('MONGO_AUTHDATABASE')
-    return `mongodb://${login}:${password}@${host}:${port}/${database}`
+    const MONGO = APP_CONSTANTS.MONGO_DB.MONGODB
+    const LOGIN = configService.get(APP_CONSTANTS.MONGO_DB.LOGIN)
+    const PASSWORD = configService.get(APP_CONSTANTS.MONGO_DB.PASSWORD)
+    const HOST = configService.get(APP_CONSTANTS.MONGO_DB.HOST)
+    const PORT = configService.get(APP_CONSTANTS.MONGO_DB.PORT)
+    const DATABASE = configService.get(APP_CONSTANTS.MONGO_DB.DATABASE)
+    return `${MONGO}://${LOGIN}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}`
 }
 
 const getMongoOptions = () => ({
