@@ -11,6 +11,7 @@ export const APP_CONSTANTS = {
         AUTH: 'Auth',
         PRODUCT: 'Product',
         REVIEW: 'Review',
-        TOP_PAGE: 'TopPage'
+        TOP_PAGE: 'TopPage',
+        USER: 'User'
     }
 }
