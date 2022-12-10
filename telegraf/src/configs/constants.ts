@@ -13,5 +13,8 @@ export const APP_CONSTANTS = {
         REVIEW: 'Review',
         TOP_PAGE: 'TopPage',
         USER: 'User'
+    },
+    JWT: {
+        SECRET: 'JWT_SECRET'
     }
 }
