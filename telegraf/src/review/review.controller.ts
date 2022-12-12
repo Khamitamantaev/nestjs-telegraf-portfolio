@@ -15,6 +15,7 @@ import {
     UseGuards
 } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common/pipes';
+import { UserEmail } from 'src/decorators/user-email.decorator';
 
 @Controller('review')
 export class ReviewController {
@@ -27,6 +28,7 @@ export class ReviewController {
         this.reviewService.create(dto)
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
     async delete(@Param('id') id: string) {
         const deleteDoc = await this.reviewService.delete(id)
@@ -37,7 +39,8 @@ export class ReviewController {
 
     @UseGuards(JwtAuthGuard)
     @Get('byProduct/:productId')
-    async getByProduct(@Param('productId') productId: string) {
+    async getByProduct(@Param('productId') productId: string, @UserEmail() email: string) {
+        console.log(email)
         return this.reviewService.findByProductId(productId)
     }
 }
