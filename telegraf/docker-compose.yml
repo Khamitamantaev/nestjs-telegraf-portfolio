@@ -11,4 +11,4 @@ services:
       - 27017:27017
     volumes:
       - ./mongo-data:/data/db
-    command: --wiredTigerCacheSizeGB 1.5
+    command: --wiredTigerCacheSizeGB 2.5

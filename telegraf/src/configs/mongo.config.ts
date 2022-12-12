@@ -15,7 +15,10 @@ const getMongoString = (configService: ConfigService) => {
     const HOST = configService.get(APP_CONSTANTS.MONGO_DB.HOST)
     const PORT = configService.get(APP_CONSTANTS.MONGO_DB.PORT)
     const DATABASE = configService.get(APP_CONSTANTS.MONGO_DB.DATABASE)
-    return `${MONGO}://${LOGIN}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}`
+
+    const URI = `${MONGO}://${LOGIN}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}`
+    console.log(URI)
+    return URI
 }
 
 const getMongoOptions = () => ({
