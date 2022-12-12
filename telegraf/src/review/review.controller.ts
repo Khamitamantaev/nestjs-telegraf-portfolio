@@ -16,6 +16,7 @@ import {
 } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common/pipes';
 import { UserEmail } from 'src/decorators/user-email.decorator';
+import { IdValidationPipe } from 'src/pipes/id-validation.pipe';
 
 @Controller('review')
 export class ReviewController {
@@ -30,7 +31,7 @@ export class ReviewController {
 
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
-    async delete(@Param('id') id: string) {
+    async delete(@Param('id', IdValidationPipe) id: string) {
         const deleteDoc = await this.reviewService.delete(id)
         if (!deleteDoc) {
             throw new HttpException(REVIEW_NOT_FOUND, HttpStatus.NOT_FOUND)
@@ -39,7 +40,7 @@ export class ReviewController {
 
     @UseGuards(JwtAuthGuard)
     @Get('byProduct/:productId')
-    async getByProduct(@Param('productId') productId: string, @UserEmail() email: string) {
+    async getByProduct(@Param('productId', IdValidationPipe) productId: string, @UserEmail() email: string) {
         console.log(email)
         return this.reviewService.findByProductId(productId)
     }
