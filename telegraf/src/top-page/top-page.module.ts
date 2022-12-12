@@ -4,10 +4,11 @@ import { Module } from '@nestjs/common';
 import { TopPageController } from './top-page.controller';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { APP_CONSTANTS } from 'src/configs/constants';
+import { TopPageService } from './top-page.service';
 
 @Module({
   controllers: [TopPageController],
-  providers: [ConfigService],
+  providers: [ConfigService, TopPageService],
   imports: [TypegooseModule.forFeature([
     {
       typegooseClass: TopPageModel,
