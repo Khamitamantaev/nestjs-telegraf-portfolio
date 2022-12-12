@@ -1,11 +1,11 @@
 export const APP_CONSTANTS = {
     MONGO_DB: {
         MONGODB: 'mongodb',
-        LOGIN: 'MONGO_LOGIN',
-        PASSWORD: 'MONGO_PASSWORD',
-        HOST: 'MONGO_HOST',
-        PORT: 'MONGO_PORT',
-        DATABASE: 'MONGO_AUTHDATABASE'
+        LOGIN: 'mongo.login',
+        PASSWORD: 'mongo.password',
+        HOST: 'mongo.host',
+        PORT: 'mongo.port',
+        DATABASE: 'mongo.database'
     },
     COLLECTIONS: {
         AUTH: 'Auth',
@@ -15,6 +15,6 @@ export const APP_CONSTANTS = {
         USER: 'User'
     },
     JWT: {
-        SECRET: 'JWT_SECRET'
+        SECRET: 'jwt.secret'
     }
 }
