@@ -53,7 +53,17 @@ export class ProductService {
             {
                 $addFields: {
                     reviewCount: { $size: '$reviews' }, // количество найденных элементо в массиве reviews
-                    reviewAvg: { $avg: '$reviews.rating' } // рассчитывает средний рейтинг всех ревью в массиве reviews
+                    reviewAvg: { $avg: '$reviews.rating' }, // рассчитывает средний рейтинг всех ревью в массиве reviews
+                    reviews: {
+                        $function: {
+                            body: `function(reviews) {
+                                reviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+                                return reviews
+                            }`,
+                            args: ['$reviews'], // массив аргументов переданных функции для выполнения
+                            lang: 'js'
+                        }
+                    }
                 }
             }]).exec()
     }
