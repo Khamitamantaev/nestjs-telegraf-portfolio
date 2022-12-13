@@ -1,4 +1,3 @@
-import { ReviewModel } from './../review/model/review.model';
 import { APP_CONSTANTS } from './../configs/constants';
 import { FindProductDto } from './dto/find-product.dto';
 import { CreateProductDto } from './dto/create-product.dto';
