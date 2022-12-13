@@ -13,6 +13,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "documentation:serve": "npx @compodoc/compodoc -p tsconfig.json --serve",
     "lint": "tslint --fix --project .",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -21,6 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@compodoc/compodoc": "^1.1.19",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^8.0.0",

@@ -12,22 +12,48 @@ export class ProductService {
         @InjectModel(ProductModel) private readonly productModel: ReturnModelType<typeof ProductModel>
     ) { }
 
+    /**
+     * Метод создает продукт  в базе 
+     * @param dto dto используемая для создания продукта
+     */
     async create(dto: CreateProductDto): Promise<ProductModel> {
         return this.productModel.create(dto)
     }
 
+    /**
+     * Метод находит продукт в базе 
+     * @param id id найденного продукта в базе
+     * @returns Возвращает объект найденного продукта из базы
+     */
     async findById(id: string): Promise<ProductModel | undefined> {
         return this.productModel.findById(id).exec()
     }
 
+    /**
+     * Метод удаляет продукт в базе 
+     * @param id id удаляемого продукта в базе
+     * @returns Возвращает объект удаленного продукта из базы
+     */
     async deleteById(id: string): Promise<ProductModel | undefined> {
         return this.productModel.findByIdAndDelete(id).exec()
     }
 
+    /**
+     * Метод обновляет продукт найденный по id, полями из dto
+     * @param id id обновляемого продукта в базе
+     * @param id dto для обновления полей  найденного продукта в базе
+     */
     async updateById(id: string, dto: CreateProductDto): Promise<ProductModel> {
         return this.productModel.findByIdAndUpdate(id, dto, { new: true }).exec()
     }
 
+    /**
+     * Метод находит все продукты по категории с сортировкой и лимитом получения
+     * и вместе с ними (aggregate) присоединяет массив Рейтингов(Reviews)
+     * у которых productId равен _id продукта 
+     * плюс добавлена функция для сортировки Рейтингов в массиве reviews по дате
+     * @param id id удаляемого рейтинга в базе
+     */
     async findWithReviews(dto: FindProductDto) {
          return await this.productModel.aggregate([
             {
@@ -35,11 +61,11 @@ export class ProductService {
             },
             {
                 $sort: {
-                    _id: 1 // сортировка чтобы упорядочить 
+                    _id: 1
                 },
             },
             {
-                $limit: dto.limit // лимит получаемых данных 
+                $limit: dto.limit 
             },
             {
                 $lookup: {

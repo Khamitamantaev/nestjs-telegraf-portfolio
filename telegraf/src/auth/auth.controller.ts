@@ -11,6 +11,9 @@ export class AuthController {
                 private readonly userService: UserService
         ) {}
 
+    /**
+     * Метод для регистрации пользователя
+     */
     @UsePipes(new ValidationPipe())
     @Post('register')
     async register(@Body() dto: AuthDto) {
@@ -21,6 +24,10 @@ export class AuthController {
         return this.userService.createUser(dto)
     }
 
+
+    /**
+     * Метод для логина пользователя
+     */
     @UsePipes(new ValidationPipe())
     @HttpCode(200)
     @Post('login')
