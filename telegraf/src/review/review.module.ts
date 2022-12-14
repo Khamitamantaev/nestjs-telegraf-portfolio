@@ -8,12 +8,12 @@ import { ReviewService } from './review.service';
 @Module({
   controllers: [ReviewController],
   imports: [TypegooseModule.forFeature([
-    {
-      typegooseClass: ReviewModel,
-      schemaOptions: {
-        collection: APP_CONSTANTS.COLLECTIONS.REVIEW
-      }
-    }
+	{
+		typegooseClass: ReviewModel,
+		schemaOptions: {
+		collection: APP_CONSTANTS.COLLECTIONS.REVIEW
+		}
+	}
   ])],
   providers: [ReviewService]
 })

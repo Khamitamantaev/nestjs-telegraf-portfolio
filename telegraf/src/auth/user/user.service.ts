@@ -7,20 +7,20 @@ import { genSalt, hash } from 'bcryptjs';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @InjectModel(UserModel) private readonly userModel: ReturnModelType<typeof UserModel>
-    ) { }
+	constructor(
+		@InjectModel(UserModel) private readonly userModel: ReturnModelType<typeof UserModel>
+	) { }
 
-    async createUser(dto: AuthDto) {
-        const salt = await genSalt(10)
-        const newUser = new this.userModel({
-            email: dto.login,
-            passwordHash: await hash(dto.password, salt)
-        })
-        return newUser.save()
-    }
+	async createUser(dto: AuthDto) {
+		const salt = await genSalt(10);
+		const newUser = new this.userModel({
+			email: dto.login,
+			passwordHash: await hash(dto.password, salt)
+		});
+		return newUser.save();
+	}
 
-    async findUser(email: string) {
-        return this.userModel.findOne({ email }).exec()
-    }
+	async findUser(email: string) {
+		return this.userModel.findOne({ email }).exec();
+	}
 }

@@ -12,18 +12,18 @@ import config from './configs/configuration'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [config]
-    }),
-    TypegooseModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: GetMongoConfiguration
-    }),
-    AuthModule,
-    ReviewModule,
-    ProductModule,
-    TopPageModule],
+  	ConfigModule.forRoot({
+  		load: [config]
+	}),
+	TypegooseModule.forRootAsync({
+  		imports: [ConfigModule],
+  		inject: [ConfigService],
+  		useFactory: GetMongoConfiguration
+	}),
+	AuthModule,
+	ReviewModule,
+	ProductModule,
+	TopPageModule],
   controllers: [AppController],
   providers: [AppService],
 })
