@@ -10,12 +10,12 @@ import { TopPageService } from './top-page.service';
   controllers: [TopPageController],
   providers: [ConfigService, TopPageService],
   imports: [TypegooseModule.forFeature([
-    {
-      typegooseClass: TopPageModel,
-      schemaOptions: {
-        collection: APP_CONSTANTS.COLLECTIONS.TOP_PAGE
-      }
-    }
+	{
+		typegooseClass: TopPageModel,
+		schemaOptions: {
+		collection: APP_CONSTANTS.COLLECTIONS.TOP_PAGE
+		}
+	}
   ])]
 })
 export class TopPageModule {}

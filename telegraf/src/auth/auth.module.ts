@@ -14,21 +14,21 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 @Module({
   controllers: [AuthController],
   imports: [
-    TypegooseModule.forFeature([
-    {
-      typegooseClass: UserModel,
-      schemaOptions: {
-        collection: APP_CONSTANTS.COLLECTIONS.USER
-      }
-    }
+	TypegooseModule.forFeature([
+	{
+		typegooseClass: UserModel,
+		schemaOptions: {
+		collection: APP_CONSTANTS.COLLECTIONS.USER
+		}
+	}
   ]),
   ConfigModule,
   JwtModule.registerAsync({
-    imports: [
-      ConfigModule
-    ],
-    inject: [ConfigService],
-    useFactory: getJwtConfig
+	imports: [
+		ConfigModule
+	],
+	inject: [ConfigService],
+	useFactory: getJwtConfig
   }),
   PassportModule
 ],
