@@ -14,16 +14,8 @@ export class FilesController {
 		@HttpCode(200)
 		@UseGuards(JwtAuthGuard)
 		@UseInterceptors(FileInterceptor('files'))
-		async uploadFile(@UploadedFile() file: Express.Multer.File): Promise<FileElementResponse[]> {
-            const saveArray: MFile[] = [new MFile(file)];
-            if(file.mimetype.includes('image')) {
-                const buffer = await this.fileService.convertToWebP(file.buffer);
-                saveArray.push(new MFile({
-                    originalname: `${file.originalname.split('.')[0]}.webp`,
-                    buffer
-                }));
-                
-            }
-			return this.fileService.saveFiles(saveArray);
+		async uploadFile(@UploadedFile() file: Express.Multer.File): Promise<FileElementResponse> {
+            const saveFile: MFile = new MFile(file);
+			return this.fileService.saveFiles(saveFile);
 		}
 }

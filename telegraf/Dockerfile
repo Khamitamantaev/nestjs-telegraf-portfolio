@@ -6,11 +6,11 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
-RUN npm install
+RUN npm ci
 # npm install --platform=linuxmusl --arch=x64 sharp
 # Пробую таким образом установить sharp 
 # Детали ошибки во время сборки: Cannot find module '../build/Release/sharp-linuxmusl-x64.node' 
-RUN npm install --arch=arm64 --platform=linuxmusl sharp
+# RUN npm install --platform=linuxmusl --arch=x64 sharp
 
 COPY --chown=node:node . .
 
