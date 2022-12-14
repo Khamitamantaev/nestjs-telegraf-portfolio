@@ -19,13 +19,12 @@ services:
       # Только этап разработки будет построен из Dockerfile
       target: development
     volumes:
-    # Только этап разработки будет построен из Dockerfile
       - .:/usr/src/app
     env_file:
-      - .env
+      - development.env
       # Запустим команду на этапе разработки 
     command: npm run start:dev
     ports:
-      - 3000:3000
+      - 3001:3000
     depends_on:
       - mongo
