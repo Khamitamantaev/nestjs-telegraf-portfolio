@@ -4,6 +4,6 @@ export class MFile {
 
     constructor(file: Express.Multer.File | MFile) {
         this.buffer = file.buffer;
-        this.originalname = file.originalname
+        this.originalname = file.originalname;
     }
 }
