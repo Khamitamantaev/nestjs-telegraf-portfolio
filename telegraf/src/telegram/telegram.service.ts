@@ -48,8 +48,8 @@ export class TelegramService {
   }
 
   /**
- * +18 
- * @param dto dto того, чтобы найти массив истории по тегу для +18
+ * -18 
+ * @param dto dto того, чтобы найти массив истории по тегу для -18
  */
   async findLess18Story(dto: FindTelegramStoryDto) {
     return this.telegramStoryModel.find({ age: { $lte: 18 }, tags: dto.tag })

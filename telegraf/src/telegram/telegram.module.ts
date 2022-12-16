@@ -8,6 +8,7 @@ import { TelegrafModule } from 'nestjs-telegraf';
 import config from 'src/configs/configuration';
 import { TelegramStoryModel } from './model/telegram-story.model';
 import { APP_CONSTANTS } from 'src/configs/constants';
+import { StoryService } from './story/story.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { APP_CONSTANTS } from 'src/configs/constants';
     })
   ],
   controllers: [TelegramController],
-  providers: [TelegramService]
+  providers: [TelegramService, StoryService]
 })
 export class TelegramModule { }
