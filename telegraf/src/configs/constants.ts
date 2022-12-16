@@ -8,6 +8,7 @@ export const APP_CONSTANTS = {
 		DATABASE: 'mongo.database'
 	},
 	COLLECTIONS: {
+		TELEGRAM_STORY_MODEL: 'TelegramStory',
 		AUTH: 'Auth',
 		PRODUCT: 'Product',
 		REVIEW: 'Review',
