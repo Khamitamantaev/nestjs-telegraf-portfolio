@@ -9,6 +9,9 @@ export default () => ({
 	},
 	jwt: {
 		secret: process.env.JWT_SECRET
+	},
+	telegram: {
+		bot_token: process.env.TELEGRAM_BOT_TOKEN
 	}
   });
   

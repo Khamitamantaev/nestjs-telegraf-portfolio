@@ -1,0 +1,1 @@
+export const TELEGRAM_BOT_KEY = 'telegram.bot_token'
