@@ -13,7 +13,7 @@ import { TelegramService } from '../telegram.service';
 export class StoryService implements OnModuleInit {
   constructor(
     @InjectBot() private bot: Telegraf<TelegrafContext>,
-     private readonly telegramService: TelegramService ) { }
+    private readonly telegramService: TelegramService) { }
 
 
   async onModuleInit() {
@@ -25,8 +25,8 @@ export class StoryService implements OnModuleInit {
     await ctx.reply(`Привет! Меня зовут Хамит, хочешь получить порцию необыкновенных шуток? Тогда поехали...`,
       {
         reply_markup: {
-          keyboard: [
-            [{ text: 'Поехали', }, { text: 'Хватит шутить' }],
+          inline_keyboard: [
+            [{ text: 'Поехали', callback_data: '1' }]
           ],
         },
       }
@@ -41,11 +41,11 @@ export class StoryService implements OnModuleInit {
     const userAnswer = 'data' in cbQuery ? cbQuery.data : null;
 
     if (userAnswer === '1') {
-      await ctx.reply(`Привет! Меня зовут Хамит, хочешь получить порцию необыкновенных шуток? Тогда поехали...`,
+      await ctx.reply(`Тебе есть 18?`,
         {
           reply_markup: {
             keyboard: [
-              [{ text: 'Поехали' }, { text: 'Хватит шутить' }],
+              [{ text: 'Да, есть' }, { text: 'Нет, но все равно' }],
             ],
           },
         }
@@ -61,14 +61,70 @@ export class StoryService implements OnModuleInit {
     await ctx.reply('Send me a sticker');
   }
 
-  @Hears('Поехали')
-  async goJoke(ctx: Context) {
+  
+
+  @Hears('Начнем')
+  async goJokeLess18(ctx: Context) {
     // const stories = await this.telegramService.findLess18Story()
-    await ctx.reply('Hey there');
+    await ctx.reply('Выбери тему', {
+      reply_markup: {
+        inline_keyboard: [
+        [ 
+          { text: 'Шутки', callback_data: '8' }, 
+          { text: 'Анекдоты', callback_data: '9' },
+          { text: 'Истории', callback_data: '10'}
+        ],
+        ],
+      }
+    });
   }
 
-  @Hears('Хватит шутить')
+
+  @Hears('Поехали')
+  async goJokeGte18(ctx: Context) {
+    // const stories = await this.telegramService.findLess18Story()
+    await ctx.reply('Выбери тему', {
+      reply_markup: {
+        inline_keyboard: [
+        [ 
+          { text: 'Шутки', callback_data: '11' }, 
+          { text: 'Анекдоты', callback_data: '12' },
+          { text: 'Истории', callback_data: '13'}
+        ],
+        ],
+      }
+    });
+  }
+
+  @Hears('Вернуться назад')
   async stopJoke(ctx: Context) {
-    await ctx.reply('Hey there');
+    await ctx.reply('Будем рады видеть тебя здесь, ты все равно вернешься поржать.. Для начала тебе снова придется нажать на /start', {
+      reply_markup: {
+        remove_keyboard: true
+      } 
+    });
+  }
+
+  @Hears('Да, есть')
+  async have18(ctx: Context) {
+    await ctx.reply('Тогда жми кнопку и поехали..', {
+      reply_markup: {
+        keyboard: [
+          [{ text: 'Поехали' }, { text: 'Вернуться назад' }],
+        ],
+      }
+      
+    });
+  }
+
+  @Hears('Нет, но все равно')
+  async notHave18(ctx: Context) {
+    await ctx.reply('Тогда жми кнопку и поехали.. У нас найдутся истории для всех возрастов', {
+      reply_markup: {
+        keyboard: [
+          [{ text: 'Начнем' }, { text: 'Вернуться назад' }],
+        ],
+      }
+    });
   }
 }
