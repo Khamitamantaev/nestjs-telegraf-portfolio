@@ -42,7 +42,7 @@ export class StoryService {
     );
   }
 
-  @Action('go')
+  @Action(GO)
   async onAnswer(
     @Ctx() ctx: SceneContext & { update: Update.CallbackQueryUpdate }
   ) {
