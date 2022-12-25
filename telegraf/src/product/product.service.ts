@@ -1,3 +1,4 @@
+import { UpdateProductDto } from './dto/update-product.dto';
 import { APP_CONSTANTS } from './../configs/constants';
 import { FindProductDto } from './dto/find-product.dto';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -43,7 +44,7 @@ export class ProductService {
      * @param id id обновляемого продукта в базе
      * @param id dto для обновления полей  найденного продукта в базе
      */
-	async updateById(id: string, dto: CreateProductDto): Promise<ProductModel> {
+	async updateById(id: string, dto: UpdateProductDto): Promise<ProductModel> {
 		return this.productModel.findByIdAndUpdate(id, dto, { new: true }).exec();
 	}
 

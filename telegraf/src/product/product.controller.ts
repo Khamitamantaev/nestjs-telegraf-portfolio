@@ -1,8 +1,10 @@
+import { UpdateProductDto } from './dto/update-product.dto';
 import { IdValidationPipe } from './../pipes/id-validation.pipe';
 import { PRODUCT_NOT_FOUND } from './product.constants';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDto } from './dto/find-product.dto';
+import { PartialType } from '@nestjs/mapped-types';
 import { 
 	Body, 
 	Controller, 
@@ -54,7 +56,7 @@ export class ProductController {
 
 	@UseGuards(JwtAuthGuard)
 	@Patch(':id')
-	async patch(@Param('id', IdValidationPipe) id: string, @Body() dto: ProductModel) {
+	async patch(@Param('id', IdValidationPipe) id: string, @Body() dto: UpdateProductDto) {
 		const updatedProduct = await this.productService.updateById(id, dto);
 		if(!updatedProduct) {
 			throw new NotFoundException(PRODUCT_NOT_FOUND);

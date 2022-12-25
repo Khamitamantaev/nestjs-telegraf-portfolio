@@ -1,5 +1,5 @@
 {
-  "name": "telegraf",
+  "name": "telegrafs",
   "version": "0.0.1",
   "description": "This App is portfolio",
   "author": "Khamit Amantaev",
@@ -27,6 +27,7 @@
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^9.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/serve-static": "^3.0.0",
@@ -38,12 +39,14 @@
     "date-fns": "^2.29.3",
     "fs-extra": "^11.1.0",
     "mongoose": "^6.8.0",
+    "nestjs-telegraf": "^2.6.3",
     "nestjs-typegoose": "^7.1.38",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "telegraf": "^4.10.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
