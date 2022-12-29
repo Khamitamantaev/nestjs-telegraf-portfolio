@@ -4,8 +4,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-let productId = new Types.ObjectId().toHexString()
-describe('AppController (e2e)', () => {
+const productId = new Types.ObjectId().toHexString()
+;describe('AppController (e2e)', () => {
 	let app: INestApplication;
 	let createdId: string;
 	const testReviewDto: CreateReviewDto = {
@@ -15,7 +15,7 @@ describe('AppController (e2e)', () => {
 		rating: 1,
 		productId
 	}
-
+;
 	beforeEach(async () => {
 		const moduleFixture: TestingModule = await Test.createTestingModule({
 			imports: [AppModule],

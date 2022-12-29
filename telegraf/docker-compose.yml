@@ -12,3 +12,19 @@ services:
     volumes:
       - ./mongo-data:/data/db
     command: --wiredTigerCacheSizeGB 2.5
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Только этап разработки будет построен из Dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - development.env
+      # Запустим команду на этапе разработки 
+    command: npm run start:dev
+    ports:
+      - 3001:3000
+    depends_on:
+      - mongo

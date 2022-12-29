@@ -8,12 +8,12 @@ import { ProductService } from './product.service';
 @Module({
   controllers: [ProductController],
   imports: [TypegooseModule.forFeature([
-    {
-      typegooseClass: ProductModel,
-      schemaOptions: {
-        collection: APP_CONSTANTS.COLLECTIONS.PRODUCT
-      }
-    }
+	{
+		typegooseClass: ProductModel,
+		schemaOptions: {
+		collection: APP_CONSTANTS.COLLECTIONS.PRODUCT
+		}
+	}
   ])],
   providers: [ProductService]
 })
