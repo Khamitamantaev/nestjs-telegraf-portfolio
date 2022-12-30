@@ -8,7 +8,6 @@ services:
       target: development
     volumes:
        - ./telegraf:/usr/src/app
-       - /usr/src/app/node_modules
     env_file:
       - ./telegraf/development.env
       # Запустим команду на этапе разработки 

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -9,16 +9,14 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <Navbar bg="dark" expand="lg" variant='dark'>
+        <Navbar bg="primary" expand="lg" variant='dark'>
             <Container>
-                <Navbar.Brand >
-                    <Link className='link' to="/">
+                <Navbar.Brand as={Link} to="/">
                         Khammerson
-                    </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav className='m-auto'>
+                    {/* <Nav className='m-auto'>
                         <Form className="d-flex">
                             <Form.Control
                                 type="search"
@@ -27,15 +25,13 @@ const Header = () => {
                                 aria-label="Search"
                             />
                         </Form>
-                    </Nav>
-                    <Nav
+                    </Nav> */}
+                    <Nav className='ml-auto'
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link>
-                            <Link className='link' to="/products">
+                        <Nav.Link as={Link} to="/products">
                                 Products
-                            </Link>
                         </Nav.Link>
                         <NavDropdown title="Khamit Amantaev" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action4">
