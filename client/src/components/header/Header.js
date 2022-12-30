@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -31,7 +30,7 @@ const Header = () => {
                         <Nav.Link href="#action2">WorkSpace</Nav.Link>
                         <NavDropdown title="Khamit Amantaev" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action4">
-                                My Profile
+                                My Profilew
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action5">

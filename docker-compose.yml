@@ -10,21 +10,37 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongo-data:/data/db
+      - ./telegraf/mongo-data:/data/db
     command: --wiredTigerCacheSizeGB 2.5
   api:
     build:
       dockerfile: Dockerfile
-      context: .
+      context: ./telegraf
       # Только этап разработки будет построен из Dockerfile
       target: development
     volumes:
-      - .:/usr/src/app
+      - ./telegraf:/usr/src/app
     env_file:
-      - development.env
+      - ./telegraf/development.env
       # Запустим команду на этапе разработки 
     command: npm run start:dev
     ports:
-      - 3001:3000
+      - 5001:5000
     depends_on:
       - mongo
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+      target: development
+    container_name: client-app
+    command: npm run start
+    ports:
+      - '3001:3000'
+    restart: unless-stopped
+    volumes:
+      - ./client/src:/usr/src/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
