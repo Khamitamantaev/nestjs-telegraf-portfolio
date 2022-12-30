@@ -1,0 +1,43 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: unless-stopped
+    env_file:
+      - ./telegraf/production.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - 27017:27017
+    volumes:
+      - ./telegraf/mongo-data:/data/db
+    command: --wiredTigerCacheSizeGB 2.5
+  api:
+    container_name: nest-product-api
+    build:
+      dockerfile: Dockerfile
+      context: ./telegraf
+      # Только этап production будет построен из Dockerfile
+      target: production
+    volumes:
+      - ./telegraf:/usr/src/app
+    env_file:
+      - ./telegraf/production.env
+    ports:
+      - 5001:5001
+    depends_on:
+      - mongo
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+      target: build
+    container_name: client-product-app
+    command: serve -s build -l 3000
+    ports:
+      - '3001:3000'
+    restart: unless-stopped
+    depends_on:
+      - api

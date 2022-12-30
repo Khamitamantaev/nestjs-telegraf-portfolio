@@ -1,0 +1,34 @@
+version: '3'
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./telegraf
+      # Только этап разработки будет построен из Dockerfile
+      target: development
+    volumes:
+       - ./telegraf:/usr/src/app
+    env_file:
+      - ./telegraf/development.env
+      # Запустим команду на этапе разработки 
+    command: npm run start:dev
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+      target: development
+    container_name: client-app
+    command: npm run start
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+    volumes:
+      - ./client/src:/usr/src/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
