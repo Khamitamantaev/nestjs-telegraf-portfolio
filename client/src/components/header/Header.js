@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Header = () => {
     return (
-        <Navbar bg="primary" expand="lg" variant='dark'>
+        <Navbar bg="dark" expand="lg" variant='dark'>
             <Container>
                 <Navbar.Brand href="/">Khammerson</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -27,7 +27,7 @@ const Header = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action2">WorkSpacewwww</Nav.Link>
+                        <Nav.Link href="#action2">WorkSpace</Nav.Link>
                         <NavDropdown title="Khamit Amantaev" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action4">
                                 My Profile
