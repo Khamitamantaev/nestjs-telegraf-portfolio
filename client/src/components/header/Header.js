@@ -11,10 +11,8 @@ const Header = () => {
     return (
         <Navbar bg="dark" expand="lg" variant='dark'>
             <Container>
-                <Navbar.Brand >
-                    <Link className='link' to="/">
+                <Navbar.Brand as={Link} to="/">
                         Khammerson
-                    </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -32,10 +30,8 @@ const Header = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link>
-                            <Link className='link' to="/products">
+                        <Nav.Link as={Link} to="/products">
                                 Products
-                            </Link>
                         </Nav.Link>
                         <NavDropdown title="Khamit Amantaev" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action4">
