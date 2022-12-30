@@ -1,16 +1,21 @@
 import React from 'react'
-
+import './Header.css'
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <Navbar bg="primary" expand="lg" variant='dark'>
+        <Navbar bg="dark" expand="lg" variant='dark'>
             <Container>
-                <Navbar.Brand href="/">Khammerson</Navbar.Brand>
+                <Navbar.Brand >
+                    <Link className='link' to="/">
+                        Khammerson
+                    </Link>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className='m-auto'>
@@ -27,7 +32,11 @@ const Header = () => {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action2">WorkSpacewwww</Nav.Link>
+                        <Nav.Link>
+                            <Link className='link' to="/products">
+                                Products
+                            </Link>
+                        </Nav.Link>
                         <NavDropdown title="Khamit Amantaev" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action4">
                                 My Profile
