@@ -16,7 +16,7 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav className='m-auto'>
+                    {/* <Nav className='m-auto'>
                         <Form className="d-flex">
                             <Form.Control
                                 type="search"
@@ -25,8 +25,8 @@ const Header = () => {
                                 aria-label="Search"
                             />
                         </Form>
-                    </Nav>
-                    <Nav
+                    </Nav> */}
+                    <Nav className='ml-auto'
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
