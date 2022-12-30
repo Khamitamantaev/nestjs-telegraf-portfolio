@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <Navbar bg="dark" expand="lg" variant='dark'>
+        <Navbar bg="primary" expand="lg" variant='dark'>
             <Container>
                 <Navbar.Brand as={Link} to="/">
                         Khammerson

@@ -11,10 +11,19 @@ const LoginScreen = () => {
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                         </div>
                         <form>
-                            <div className="form-group"><label htmlFor="email">Email</label><input className="form-control item" type="email" id="email" /></div>
-                            <div className="form-group"><label htmlFor="password">Password</label><input className="form-control" type="password" id="password" /></div>
                             <div className="form-group">
-                                <div className="form-check"><input className="form-check-input" type="checkbox" id="checkbox" /><label className="form-check-label" htmlFor="checkbox">Remember me</label></div>
+                                <label htmlFor="email">Email</label>
+                                <input className="form-control item" type="email" id="email" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input className="form-control" type="password" id="password" />
+                            </div>
+                            <div className="form-group">
+                                <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="checkbox" />
+                                <label className="form-check-label" htmlFor="checkbox">Remember me</label>
+                            </div>
                             </div><button className="btn btn-primary btn-block" type="submit">Log In</button></form>
                     </div>
                 </section>
