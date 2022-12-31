@@ -5,11 +5,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, useNavigate } from 'react-router-dom'
-
+import { Link ,useNavigate} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/userActions';
 const Header = () => {
+    const dispatch = useDispatch()
+    const userLogin = useSelector(state => state.userLogin)
+    let navigate = useNavigate();
+    const { userInfo } = userLogin
+    const logoutHandler = () => {
+        dispatch(logout())
+        navigate("/");
+    }
 
-    const history = useNavigate();
     return (
         <Navbar bg="primary" expand="lg" variant='dark'>
             <Container>
@@ -18,16 +26,6 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    {/* <Nav className='m-auto'>
-                        <Form className="d-flex">
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                        </Form>
-                    </Nav> */}
                     <Nav className='ml-auto'
                         style={{ maxHeight: '100px' }}
                         navbarScroll
@@ -40,11 +38,7 @@ const Header = () => {
                                 My Profile
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={() => {
-                                localStorage.removeItem('userInfo')
-                                localStorage.removeItem('jwt')
-                                history('/')
-                            }}>
+                            <NavDropdown.Item onClick={logoutHandler}>
                                 Logout
                             </NavDropdown.Item>
                         </NavDropdown>

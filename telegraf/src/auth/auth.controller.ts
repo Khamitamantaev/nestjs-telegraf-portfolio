@@ -8,17 +8,17 @@ import { UserService } from './user/user.service';
 @Controller('auth')
 export class AuthController {
 	constructor(private readonly authService: AuthService,
-				private readonly userService: UserService
-		) {}
+		private readonly userService: UserService
+	) { }
 
 	/**
-     * Метод для регистрации пользователя
-     */
+	 * Метод для регистрации пользователя
+	 */
 	@UsePipes(new ValidationPipe())
 	@Post('register')
 	async register(@Body() dto: AuthDto) {
 		const findUser = await this.userService.findUser(dto.login);
-		if(findUser) {
+		if (findUser) {
 			throw new BadRequestException(ALREADY_REGISTERED_ERROR);
 		}
 		return this.userService.createUser(dto);
@@ -26,14 +26,18 @@ export class AuthController {
 
 
 	/**
-     * Метод для логина пользователя
-     */
+	 * Метод для логина пользователя
+	 */
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Post('login')
 	async login(@Body() { login, password }: AuthDto) {
 		const { email } = await this.authService.validateUser(login, password);
-
-		return this.authService.login(email);
+		const user = await this.userService.findUser(email);
+		const token = await this.authService.login(email)
+		return {
+			user,
+			token
+		};
 	}
 }

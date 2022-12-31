@@ -1,37 +1,27 @@
-import { async } from 'q'
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Loading from '../../components/loading/Loading'
 import ErrorMessage from '../../components/error/ErrorMessage'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../actions/userActions'
+import { useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
+    let navigate = useNavigate();
+    const dispatch = useDispatch()
+    const userLogin = useSelector((state) => state.userLogin)
+    const { loading, error, userInfo }  = userLogin
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate("/products");
+        }
+    }, [userInfo])
 
     const submitHandler = async (e) => {
         e.preventDefault() //не перегружаем страницу, а пока оставляем преждней при submit
-        try {
-            const config = {
-                headers: {
-                    "Content-type": "application/json"
-                }
-            }
-            setLoading(true) // Начало загрузки
-            const { data } = await axios.post('http://127.0.0.1:5000/api/auth/login', {
-                login: email,
-                password: password
-           }, config)
-           console.log(data)
-            localStorage.setItem('jwt', JSON.stringify(data))
-            setLoading(false) // Конец загрузки
-        } catch (error) {
-            setError(error.response.data.message)
-            setTimeout(() => setError(false), 4000)
-            setLoading(false) 
-        }
+        dispatch(login(email, password))
     }
 
 

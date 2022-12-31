@@ -1,42 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import Loading from '../../components/loading/Loading'
-import axios from 'axios'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../actions/userActions'
+import { useNavigate } from "react-router-dom";
 const RegisterScreen = () => {
-
+    let navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [message, setMessage] = useState("")
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+    const userRegister = useSelector((state) => state.userRegister)
+    const { loading, error, userInfo } = userRegister
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate("/products");
+        }
+    }, [userInfo])
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
-        if (password !== confirmPassword) {
-            setMessage('Passwords do not match')
+        if(password !== confirmPassword) {
+            setMessage("Password do not match")
         } else {
-            setMessage(null)
-            try {
-                const config = {
-                    headers: {
-                        "Content-type": "application/json"
-                    }
-                }
-                setLoading(true) // Начало загрузки
-                const { data } = await axios.post('http://127.0.0.1:5000/api/auth/register', {
-                    login: email,
-                    password: password
-                }, config)
-                console.log(data)
-                localStorage.setItem('userInfo', JSON.stringify(data))
-                setLoading(false) // Конец загрузки
-            } catch (error) {
-                setError(error.response.data.message)
-                setTimeout(() => setError(false), 4000)
-                setLoading(false)
-            }
+            dispatch(register(email, password))
         }
     }
 
