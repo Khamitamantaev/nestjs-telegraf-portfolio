@@ -1,8 +1,16 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import './LandingPage.css'
 import { Button, Container, Row } from 'react-bootstrap'
 
 const LandingPage = () => {
+
+    // useEffect(() => {
+    //     const userJwt = localStorage.getItem('jwt')
+    //     if(userJwt) {
+    //         history.push("/products")
+    //     }
+    // }, [history, userJwt])
+
   return (
     <div className='main'>
         <Container>

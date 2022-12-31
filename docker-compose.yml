@@ -23,6 +23,7 @@ services:
       target: production
     volumes:
       - ./telegraf:/usr/src/app
+      - /usr/src/app/node_modules
     env_file:
       - ./telegraf/production.env
     ports:
@@ -35,6 +36,8 @@ services:
       context: ./client
       target: build
     container_name: client-product-app
+    volumes:
+      - /usr/src/app/node_modules
     command: serve -s build -l 3000
     ports:
       - '3001:3000'
