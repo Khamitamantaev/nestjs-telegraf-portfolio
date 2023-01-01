@@ -1,26 +1,21 @@
 import React from 'react'
 import './Header.css'
 import Container from 'react-bootstrap/Container';
-// import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link ,useNavigate} from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/userActions';
 const Header = () => {
     const dispatch = useDispatch()
-    // const userLogin = useSelector(state => state.userLogin)
+    const userLogin = useSelector(state => state.userLogin)
     let navigate = useNavigate();
-    // const { userInfo } = userLogin
+    const { userInfo } = userLogin
     const logoutHandler = () => {
         dispatch(logout())
         navigate("/");
     }
-
-    // useEffect(() => {
-    //   console.log('UserInfo from Header: ', userInfo)
-    // }, [userInfo])
     
 
     return (
@@ -31,14 +26,14 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav className='ml-auto'
+                    { userInfo ? <Nav className='ml-auto'
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
                         <Nav.Link as={Link} to="/products">
                                 Products
                         </Nav.Link>
-                        <NavDropdown title="Khamit Amantaev" id="navbarScrollingDropdown">
+                        <NavDropdown title={userInfo ? userInfo.email: null } id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action4">
                                 My Profile
                             </NavDropdown.Item>
@@ -47,7 +42,8 @@ const Header = () => {
                                 Logout
                             </NavDropdown.Item>
                         </NavDropdown>
-                    </Nav>
+                    </Nav>: null }
+                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>
