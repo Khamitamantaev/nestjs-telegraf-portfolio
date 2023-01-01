@@ -18,7 +18,7 @@ const RegisterScreen = () => {
 
     useEffect(() => {
         if(userInfo) {
-            navigate("/products");
+            navigate("/");
         }
     }, [navigate, userInfo])
 

@@ -4,7 +4,7 @@ import { productList } from '../../actions/productActions'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import Loading from '../../components/loading/Loading'
 import MainScreen from '../../components/main-screen/MainScreen'
-import Product from './Product'
+import ProductItem from './ProductItem'
 import { useNavigate } from "react-router-dom";
 
 
@@ -19,7 +19,7 @@ const MyProducts = () => {
     if(!userInfo) {
         navigate("/");
     }
-  }, [dispatch, navigate])
+  }, [dispatch, navigate, userInfo])
 
   return (
     <MainScreen title="Welcome to Products">
@@ -35,18 +35,18 @@ const MyProducts = () => {
                 <div className="row">
                   <div className="col-md-6">
                     <a href="assets/img/tech/image1.jpg">
-                      <img className="img-fluid d-block mx-auto" src="assets/img/tech/image1.jpg" />
+                      <img className="img-fluid d-block mx-auto" src="assets/img/tech/image1.jpg" alt='figbassw' />
                     </a>
                   </div>
                   <div className="col-md-6">
                     <div className="info">
                       <h3>Lorem Ipsum</h3>
                       <div className="rating">
-                        <img src="assets/img/star.svg" />
-                        <img src="assets/img/star.svg" />
-                        <img src="assets/img/star.svg" />
-                        <img src="assets/img/star-half-empty.svg" />
-                        <img src="assets/img/star-empty.svg" />
+                        <img src="assets/img/star.svg" alt='star' />
+                        <img src="assets/img/star.svg" alt='star' />
+                        <img src="assets/img/star.svg" alt='star'/>
+                        <img src="assets/img/star-half-empty.svg" alt='star' />
+                        <img src="assets/img/star-empty.svg" alt='star' />
                       </div>
                       <div className="price">
                         <h3>$300.00</h3>
@@ -62,7 +62,15 @@ const MyProducts = () => {
               <div className="product-info">
                 <div>
                   <ul className="nav nav-tabs" id="myTab">
-                    <li className="nav-item"><a className="nav-link active" role="tab" data-toggle="tab" id="description-tab" href="#description">Description</a></li>
+                    <li className="nav-item">
+                      <a className="nav-link active" 
+                        role="tab" data-toggle="tab" 
+                        id="description-tab" 
+                        href="#description"
+                      >
+                        Description
+                      </a>
+                    </li>
                     <li className="nav-item"><a className="nav-link" role="tab" data-toggle="tab" id="specifications-tabs" href="#specifications">Specifications</a></li>
                     <li className="nav-item"><a className="nav-link" role="tab" data-toggle="tab" id="reviews-tab" href="#reviews">Reviews</a></li>
                   </ul>
@@ -73,7 +81,7 @@ const MyProducts = () => {
                       <div className="row">
                         <div className="col-md-5">
                           <figure className="figure">
-                            <img className="img-fluid figure-img" src="assets/img/tech/image3.png" />
+                            <img className="img-fluid figure-img" src="assets/img/tech/image3.png" alt='figbass' />
                           </figure>
                         </div>
                         <div className="col-md-7">
@@ -88,7 +96,7 @@ const MyProducts = () => {
                         </div>
                         <div className="col-md-5">
                           <figure className="figure">
-                            <img className="img-fluid figure-img" src="assets/img/tech/image3.png" />
+                            <img className="img-fluid figure-img" src="assets/img/tech/image3.png"  alt='figbass' />
                           </figure>
                         </div>
                       </div>
@@ -120,21 +128,42 @@ const MyProducts = () => {
                     <div className="tab-pane fade show" role="tabpanel" id="reviews">
                       <div className="reviews">
                         <div className="review-item">
-                          <div className="rating"><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star-empty.svg" /></div>
+                          <div className="rating">
+                            <img src="assets/img/star.svg"  alt='star' />
+                            <img src="assets/img/star.svg"  alt='star'/>
+                            <img src="assets/img/star.svg"  alt='star'/>
+                            <img src="assets/img/star.svg" alt='star' />
+                            <img src="assets/img/star-empty.svg"  alt='star'/>
+                          </div>
                           <h4>Incredible product</h4><span className="text-muted"><a href="#">John Smith</a>, 20 Jan 2018</span>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec augue nunc, pretium at augue at, convallis pellentesque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
                       </div>
                       <div className="reviews">
                         <div className="review-item">
-                          <div className="rating"><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star-empty.svg" /></div>
-                          <h4>Incredible product</h4><span className="text-muted"><a href="#">John Smith</a>, 20 Jan 2018</span>
+                          <div className="rating">
+                            <img src="assets/img/star.svg" alt='star' />
+                            <img src="assets/img/star.svg" alt='star' />
+                            <img src="assets/img/star.svg" alt='star'/>
+                            <img src="assets/img/star.svg" alt='star'/>
+                            <img src="assets/img/star-empty.svg" alt='star'/>
+                          </div>
+                          <h4>Incredible product</h4>
+                            <span className="text-muted">
+                               <a href="#">John Smith</a>, 20 Jan 2018
+                            </span>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec augue nunc, pretium at augue at, convallis pellentesque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
                       </div>
                       <div className="reviews">
                         <div className="review-item">
-                          <div className="rating"><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star.svg" /><img src="assets/img/star-empty.svg" /></div>
+                          <div className="rating">
+                            <img src="assets/img/star.svg" alt='star'/>
+                            <img src="assets/img/star.svg" alt='star'/>
+                            <img src="assets/img/star.svg" alt='star'/>
+                            <img src="assets/img/star.svg" alt='star'/>
+                            <img src="assets/img/star-empty.svg" alt='star'/>
+                          </div>
                           <h4>Incredible product</h4><span className="text-muted"><a href="#">John Smith</a>, 20 Jan 2018</span>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec augue nunc, pretium at augue at, convallis pellentesque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
@@ -149,7 +178,7 @@ const MyProducts = () => {
                 { loading && <Loading/> }
                 <div className="items">
                   <div className="row justify-content-center">
-                    {products ? products.map((pr) => <Product title={pr.title} price={pr.price} />) : null}
+                    {products ? products.map((pr) => <ProductItem title={pr.title} price={pr.price} />) : null}
                   </div>
                 </div>
               </div>

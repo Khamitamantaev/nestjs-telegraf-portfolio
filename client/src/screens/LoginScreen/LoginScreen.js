@@ -15,7 +15,7 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if(userInfo) {
-            navigate("/products");
+            navigate("/");
         }
     }, [navigate, userInfo])
 
