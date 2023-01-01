@@ -25,7 +25,7 @@ services:
     container_name: client-app
     command: npm run start
     ports:
-      - '3000:3000'
+      - '3002:3000'
     restart: unless-stopped
     volumes:
       - ./client/src:/usr/src/app/src

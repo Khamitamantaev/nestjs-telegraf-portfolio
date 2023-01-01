@@ -6,17 +6,22 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link ,useNavigate} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../actions/userActions';
 const Header = () => {
     const dispatch = useDispatch()
-    const userLogin = useSelector(state => state.userLogin)
+    // const userLogin = useSelector(state => state.userLogin)
     let navigate = useNavigate();
-    const { userInfo } = userLogin
+    // const { userInfo } = userLogin
     const logoutHandler = () => {
         dispatch(logout())
         navigate("/");
     }
+
+    // useEffect(() => {
+    //   console.log('UserInfo from Header: ', userInfo)
+    // }, [userInfo])
+    
 
     return (
         <Navbar bg="primary" expand="lg" variant='dark'>
@@ -43,7 +48,6 @@ const Header = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-
                 </Navbar.Collapse>
             </Container>
         </Navbar>

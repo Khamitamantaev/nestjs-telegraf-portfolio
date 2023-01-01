@@ -21,7 +21,12 @@ export class AuthController {
 		if (findUser) {
 			throw new BadRequestException(ALREADY_REGISTERED_ERROR);
 		}
-		return this.userService.createUser(dto);
+		const user = await this.userService.createUser(dto);
+		const token = await this.authService.login(user.email)
+		return {
+			...user,
+			token
+		}
 	}
 
 
@@ -32,12 +37,10 @@ export class AuthController {
 	@HttpCode(200)
 	@Post('login')
 	async login(@Body() { login, password }: AuthDto) {
-		const { email, _id, createdAt } = await this.authService.validateUser(login, password);
-		const token = await this.authService.login(email)
+		const user = await this.authService.validateUser(login, password);
+		const token = await this.authService.login(user.email)
 		return {
-			email,
-			_id,
-			createdAt,
+			...user,
 			token
 		};
 	}

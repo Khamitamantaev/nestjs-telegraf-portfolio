@@ -11,8 +11,10 @@ const RegisterScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [message, setMessage] = useState("")
     const dispatch = useDispatch()
+    const userLogin = useSelector((state) => state.userLogin)
     const userRegister = useSelector((state) => state.userRegister)
-    const { loading, error, userInfo } = userRegister
+    const { userInfo } = userLogin
+    const { loading, error } = userRegister
 
     useEffect(() => {
         if(userInfo) {
