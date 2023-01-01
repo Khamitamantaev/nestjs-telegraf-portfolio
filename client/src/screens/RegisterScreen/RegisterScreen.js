@@ -18,7 +18,7 @@ const RegisterScreen = () => {
         if(userInfo) {
             navigate("/products");
         }
-    }, [userInfo])
+    }, [navigate, userInfo])
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()

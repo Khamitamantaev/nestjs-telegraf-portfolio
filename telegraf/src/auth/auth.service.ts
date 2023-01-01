@@ -18,7 +18,7 @@ export class AuthService {
      * @param password Пароль для проверки с хешированным паролем из базы
      * @returns Возвращает провалидированного юзера, если у него верный пароль
      */
-	async validateUser(email: string, password: string): Promise<Pick<UserModel, 'email'>> {
+	async validateUser(email: string, password: string): Promise<Pick<UserModel, 'email' | '_id' | 'createdAt'>> {
 		const user = await this.userService.findUser(email);
 		if (!user) {
 			throw new UnauthorizedException(USER_NOT_FOUND);
@@ -27,7 +27,7 @@ export class AuthService {
 		if (!isCorrectPassword) {
 			throw new UnauthorizedException(PASSWORD_NOT_VALID_ERROR);
 		}
-		return { email: user.email };
+		return { email: user.email, _id: user._id, createdAt: user.createdAt };
 	}
 
 	/**

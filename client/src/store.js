@@ -22,6 +22,4 @@ const store = configureStore(
     composedEnhancer
 })
 
-console.log(store.getState())
-
 export default store

@@ -17,10 +17,10 @@ const LoginScreen = () => {
         if(userInfo) {
             navigate("/products");
         }
-    }, [userInfo])
+    }, [navigate, userInfo])
 
     const submitHandler = async (e) => {
-        e.preventDefault() //не перегружаем страницу, а пока оставляем преждней при submit
+        e.preventDefault()
         dispatch(login(email, password))
     }
 
