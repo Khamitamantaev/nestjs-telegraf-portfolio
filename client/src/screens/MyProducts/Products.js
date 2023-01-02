@@ -10,6 +10,10 @@ const Products = () => {
     const dispatch = useDispatch()
     const { products, loading, error } = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
+
+    const productCreate = useSelector((state) => state.productCreate)
+    const { success: successCreate } = productCreate
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -17,7 +21,7 @@ const Products = () => {
         if (!userInfo) {
             navigate("/");
         }
-    }, [dispatch, navigate, userInfo])
+    }, [dispatch, navigate, userInfo, successCreate])
 
     return (
         <main className="page catalog-page">
