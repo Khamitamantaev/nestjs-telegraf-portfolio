@@ -82,7 +82,7 @@ const Products = () => {
                                 {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
                                 { loading && <Loading/> }
                                     <div className="row no-gutters">
-                                        {products ? products.map((pr) => <Product title={pr.title} price={pr.price} />) : null}
+                                        {products ? products.map((pr) => <Product key={pr._id} title={pr.title} price={pr.price} />) : null}
                                     </div>
                                     <nav>
                                         <ul className="pagination">

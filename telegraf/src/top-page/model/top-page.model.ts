@@ -8,30 +8,6 @@ export enum TopLevelCategory {
 	Products = 'Products'
 }
 
-export class HHData {
-
-	@prop()
-	count: number;
-
-	@prop()
-	juniorSalary: number;
-
-	@prop()
-	middleSalary: number;
-
-	@prop()
-	seniorSalary: number;
-}
-
-export class TopPageAdvantage {
-
-	@prop()
-	title: string;
-
-	@prop()
-	description: string;
-}
-
 export interface TopPageModel extends Base {}
 export class TopPageModel extends TimeStamps {
 
@@ -49,16 +25,6 @@ export class TopPageModel extends TimeStamps {
 
 	@prop()
 	category: string; // страница должна иметь категорию, по которой будут подтягиваться продукты
-
-	@prop({
-		type: () => HHData
-	})
-	hh?: HHData;
-
-	@prop({
-		type: () => [TopPageAdvantage]
-	})
-	advantages: TopPageAdvantage[];
 
 	@prop()
 	seoText: string;
