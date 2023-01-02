@@ -3,7 +3,7 @@ services:
   mongo:
     image: mongo
     container_name: mongo
-    restart: unless-stopped
+    restart: always
     env_file:
       - ./telegraf/production.env
     environment:
@@ -23,11 +23,10 @@ services:
       target: production
     volumes:
       - ./telegraf:/usr/src/app
-      - /usr/src/app/node_modules
     env_file:
       - ./telegraf/production.env
     ports:
-      - 5001:5001
+      - 5000:5001
     depends_on:
       - mongo
   client:
@@ -41,6 +40,6 @@ services:
     command: serve -s build -l 3000
     ports:
       - '3001:3000'
-    restart: unless-stopped
+    restart: always
     depends_on:
       - api

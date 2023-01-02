@@ -8,13 +8,10 @@ services:
       target: development
     volumes:
        - ./telegraf:/usr/src/app
-       - /usr/src/app/node_modules
     env_file:
       - ./telegraf/development.env
       # Запустим команду на этапе разработки 
     command: npm run start:dev
-    ports:
-      - 5000:5000
     depends_on:
       - mongo
   client:
@@ -22,7 +19,6 @@ services:
       dockerfile: Dockerfile
       context: ./client
       target: development
-    container_name: client-app
     command: npm run start
     ports:
       - '3002:3000'

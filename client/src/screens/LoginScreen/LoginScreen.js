@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './LoginScreen.css'
 import Loading from '../../components/loading/Loading'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,11 +35,12 @@ const LoginScreen = () => {
                             <h2 className="text-info">Log In</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                         </div>
-                      
-                        {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
-                        {loading && <Loading/>}
-            
+                        <div className='errorMessage'>
+                            {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
+                            {loading && <Loading/>}
+                        </div>
                         <form onSubmit={submitHandler}>
+                        
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
                                 <input

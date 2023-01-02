@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './RegisterScreen.css'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import Loading from '../../components/loading/Loading'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,16 +18,17 @@ const RegisterScreen = () => {
     const { loading, error } = userRegister
 
     useEffect(() => {
-        if(userInfo) {
+        if (userInfo) {
             navigate("/");
         }
     }, [navigate, userInfo])
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
-        if(password !== confirmPassword) {
+        if (password !== confirmPassword) {
             setMessage("Password do not match")
         } else {
+            setMessage("")
             dispatch(register(email, password))
         }
     }
@@ -40,9 +42,13 @@ const RegisterScreen = () => {
                             <h2 className="text-info">Registration</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                         </div>
-                        {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
-                        {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
-                        {loading && <Loading />}
+                        <div className='errorMessage'>
+                            {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
+                            {loading && <Loading />}
+                        </div>
+                        <div className='errorMessage'>
+                            {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
+                        </div>
                         <form onSubmit={onSubmitHandler}>
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
