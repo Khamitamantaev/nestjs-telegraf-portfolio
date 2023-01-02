@@ -83,7 +83,7 @@ const Products = () => {
                             </div>
                             <div className="col-md-9">
                                 <div className="products">
-                                {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
+                                {error && userInfo ? <ErrorMessage variant='danger'>{error}</ErrorMessage>: null}
                                 { loading && <Loading/> }
                                     <div className="row no-gutters">
                                         {products ? products.map((pr) => <Product key={pr._id} title={pr.title} price={pr.price} />) : null}

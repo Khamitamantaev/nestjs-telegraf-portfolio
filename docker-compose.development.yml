@@ -38,7 +38,7 @@ services:
     container_name: client-product-dev-app
     command: npm run start
     ports:
-      - '3002:3000'
+      - '3000:3000'
     restart: unless-stopped
     volumes:
       - ./client/src:/usr/src/app/src

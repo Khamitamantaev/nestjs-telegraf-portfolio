@@ -1,4 +1,4 @@
-import React, { useState, setState } from 'react'
+import React, { useState, setState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
 import Loading from '../../components/loading/Loading'
 import ErrorMessage from '../../components/error/ErrorMessage'
@@ -15,7 +15,6 @@ const CreateProduct = () => {
         description: ""
     })
 
-
     const resetHandler = () => {
         setState({
             title: "",
@@ -28,7 +27,14 @@ const CreateProduct = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
     const productCreate = useSelector((state) => state.productCreate)
+    const { userInfo } = useSelector((state) => state.userLogin)
     const { loading, error } = productCreate
+
+    useEffect(() => {
+        if (!userInfo) {
+            navigate("/");
+        }
+    }, [dispatch, navigate, userInfo])
 
 
     const handleChange = (e) => {
