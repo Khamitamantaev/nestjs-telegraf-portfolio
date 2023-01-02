@@ -1,34 +1,52 @@
 version: '3'
 services:
-  api:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    env_file:
+      - ./telegraf/development.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - 27017:27017
+    volumes:
+      - ./telegraf/mongo-dev:/data/db
+    command: --wiredTigerCacheSizeGB 2.5
+  api-dev:
+    container_name: nest-product-dev-api
     build:
       dockerfile: Dockerfile
       context: ./telegraf
       # Только этап разработки будет построен из Dockerfile
       target: development
     volumes:
-       - ./telegraf:/usr/src/app
+      - ./telegraf:/usr/src/app
     env_file:
       - ./telegraf/development.env
-      # Запустим команду на этапе разработки 
     command: npm run start:dev
     ports:
-      - 5000:5000
+      - 5000:5002
     depends_on:
-      - mongo
-  client:
+      - mongodb
+  client-dev:
     build:
       dockerfile: Dockerfile
       context: ./client
       target: development
-    container_name: client-app
+    container_name: client-product-dev-app
     command: npm run start
     ports:
-      - '3000:3000'
+      - '3002:3000'
     restart: unless-stopped
     volumes:
       - ./client/src:/usr/src/app/src
     stdin_open: true
     tty: true
     depends_on:
-      - api
+      - api-dev
+    
+    
+    
+    

@@ -1,0 +1,4 @@
+.errorMessage {
+    display: flex;
+    justify-content: center;
+}

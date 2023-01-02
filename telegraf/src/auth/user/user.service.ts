@@ -11,13 +11,18 @@ export class UserService {
 		@InjectModel(UserModel) private readonly userModel: ReturnModelType<typeof UserModel>
 	) { }
 
-	async createUser(dto: AuthDto) {
+	async createUser(dto: AuthDto): Promise<Pick<UserModel, '_id' | 'email' | 'createdAt'>>{
 		const salt = await genSalt(10);
 		const newUser = new this.userModel({
 			email: dto.login,
 			passwordHash: await hash(dto.password, salt)
 		});
-		return newUser.save();
+		const user = await newUser.save()
+		return {
+			_id: user._id,
+			email: user.email,
+			createdAt: user.createdAt
+		}
 	}
 
 	async findUser(email: string) {
