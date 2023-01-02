@@ -38,20 +38,12 @@ const CreateProduct = () => {
         });
     }
 
-    const haveEmptyValues = Object.values(state).every(value => {
-        if (value === "") {
-            return true;
-        }
-        return false;
-    });
-
     const submitHandler = (e) => {
         e.preventDefault()
-        if (!haveEmptyValues) {
-            dispatch(createProductAction(state.title, state.price, state.description, state.category))
-            resetHandler()
-            navigate('/products')
-        }
+        if(!state.title || !state.description || state.price === 0) return
+        dispatch(createProductAction(state.title, state.price, state.description, state.category))
+        resetHandler()
+        navigate('/products')
     }
 
     return (
