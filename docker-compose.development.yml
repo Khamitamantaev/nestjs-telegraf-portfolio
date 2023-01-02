@@ -1,18 +1,18 @@
 version: '3'
 services:
-  mongo:
+  mongodb:
     image: mongo
-    container_name: mongo
+    container_name: mongodb
     restart: always
     env_file:
-      - ./telegraf/production.env
+      - ./telegraf/development.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
     ports:
       - 27017:27017
     volumes:
-      - ./telegraf/mongo-data:/data/db
+      - ./telegraf/mongo-dev:/data/db
     command: --wiredTigerCacheSizeGB 2.5
   api-dev:
     container_name: nest-product-dev-api
@@ -29,7 +29,7 @@ services:
     ports:
       - 5000:5002
     depends_on:
-      - mongo
+      - mongodb
   client-dev:
     build:
       dockerfile: Dockerfile

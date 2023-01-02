@@ -5,6 +5,7 @@
 development.env
 production.env
 /mongo-data
+/mongo-dev
 /uploads
 #Doc
 /documentation
