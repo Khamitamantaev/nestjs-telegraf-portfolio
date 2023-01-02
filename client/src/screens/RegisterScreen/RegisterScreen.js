@@ -1,6 +1,38 @@
-import React from 'react'
-
+import React, { useState, useEffect } from 'react'
+import './RegisterScreen.css'
+import ErrorMessage from '../../components/error/ErrorMessage'
+import Loading from '../../components/loading/Loading'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../actions/userActions'
+import { useNavigate } from "react-router-dom";
 const RegisterScreen = () => {
+    let navigate = useNavigate();
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [message, setMessage] = useState("")
+    const dispatch = useDispatch()
+    const userLogin = useSelector((state) => state.userLogin)
+    const userRegister = useSelector((state) => state.userRegister)
+    const { userInfo } = userLogin
+    const { loading, error } = userRegister
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate("/");
+        }
+    }, [navigate, userInfo])
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault()
+        if (password !== confirmPassword) {
+            setMessage("Password do not match")
+        } else {
+            setMessage("")
+            dispatch(register(email, password))
+        }
+    }
+
     return (
         <div>
             <main className="page registration-page">
@@ -10,18 +42,42 @@ const RegisterScreen = () => {
                             <h2 className="text-info">Registration</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                         </div>
-                        <form>
+                        <div className='errorMessage'>
+                            {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
+                            {loading && <Loading />}
+                        </div>
+                        <div className='errorMessage'>
+                            {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
+                        </div>
+                        <form onSubmit={onSubmitHandler}>
                             <div className="form-group">
-                                <label htmlFor="name">Name</label>
-                                <input className="form-control item" type="text" id="name" />
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    value={email}
+                                    className="form-control item"
+                                    type="email" id="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Password</label>
-                                <input className="form-control item" type="password" id="password" />
+                                <input
+                                    value={password}
+                                    className="form-control item"
+                                    type="password"
+                                    id="password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <input className="form-control item" type="email" id="email" />
+                                <label htmlFor="password">Confirm Password</label>
+                                <input
+                                    value={confirmPassword}
+                                    className="form-control item"
+                                    type="password"
+                                    id="confirm_password"
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                />
                             </div>
                             <button className="btn btn-primary btn-block" type="submit">Sign Up</button>
                         </form>
