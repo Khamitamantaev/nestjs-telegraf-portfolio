@@ -1,9 +1,9 @@
-import { IsString, IsNumber, IsArray } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 
 export class CreateProductDto {
 
 	@IsString()
-	image: string;
+	selectedFile: string;
 
 	@IsString()
 	title: string;

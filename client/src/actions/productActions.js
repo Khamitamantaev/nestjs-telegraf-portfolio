@@ -44,7 +44,7 @@ export const productList = () => async (dispatch, getState) => {
     }
 }
 
-export const createProductAction = (title, price, description, category) => async (dispatch, getState) => {
+export const createProductAction = (title, price, description, category, selectedFile) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_CREATE_REQUEST
@@ -65,7 +65,8 @@ export const createProductAction = (title, price, description, category) => asyn
             title, 
             price, 
             description, 
-            category
+            category,
+            selectedFile
         }, config)
 
         dispatch({

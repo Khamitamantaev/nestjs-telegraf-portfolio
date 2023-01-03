@@ -5,6 +5,7 @@ import ErrorMessage from '../../components/error/ErrorMessage'
 import Loading from '../../components/loading/Loading'
 import { useNavigate } from "react-router-dom";
 import Product from './Product'
+import './Products.css'
 
 const Products = () => {
     let navigate = useNavigate();
@@ -87,10 +88,10 @@ const Products = () => {
                                 {error && userInfo ? <ErrorMessage variant='danger'>{error}</ErrorMessage>: null}
                                 { loading && <Loading/> }
                                     <div className="row no-gutters">
-                                        {products ? products.map((pr) => <Product key={pr._id} title={pr.title} price={pr.price} />) : null}
+                                        {products ? products.map((pr) => <Product key={pr._id} selectedFile={pr.selectedFile} title={pr.title} price={pr.price} />) : null}
                                     </div>
                                     <nav>
-                                        <ul className="pagination">
+                                        <ul className="pagination fixed-bottom">
                                             <li className="page-item disabled"><a className="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
                                             <li className="page-item active"><a className="page-link" href="#">1</a></li>
                                             <li className="page-item"><a className="page-link" href="#">2</a></li>
