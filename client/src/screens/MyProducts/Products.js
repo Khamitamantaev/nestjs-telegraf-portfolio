@@ -19,7 +19,7 @@ const Products = () => {
     
 
     useEffect(() => {
-        dispatch(productList())
+        dispatch(productList(6))
         if (!userInfo) {
             navigate("/");
         }

@@ -9,7 +9,7 @@ import {
     PRODUCT_LIST_SUCCESS 
 } from "../constants/productConstants";
 
-export const productList = () => async (dispatch, getState) => {
+export const productList = (limit) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_LIST_REQUEST
@@ -27,7 +27,7 @@ export const productList = () => async (dispatch, getState) => {
 
         const { data } = await axios.post(findProductsUrl, {
             category: 'phone',
-            limit: 6
+            limit: limit
         }, config)
 
         dispatch({
