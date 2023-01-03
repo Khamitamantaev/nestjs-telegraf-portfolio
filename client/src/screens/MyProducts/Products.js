@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Product from './Product'
 
 const Products = () => {
+    let navigate = useNavigate();
     const dispatch = useDispatch()
     const { products, loading, error } = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
@@ -14,7 +15,7 @@ const Products = () => {
     const productCreate = useSelector((state) => state.productCreate)
     const { success: successCreate } = productCreate
 
-    let navigate = useNavigate();
+    
 
     useEffect(() => {
         dispatch(productList())

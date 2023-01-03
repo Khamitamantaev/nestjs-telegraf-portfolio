@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createProductUrl, findProductsUrl } from "../api";
 import { 
     PRODUCT_CREATE_FAIL,
     PRODUCT_CREATE_REQUEST,
@@ -24,7 +25,7 @@ export const productList = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.post("http://127.0.0.1:5000/api/product/find", {
+        const { data } = await axios.post(findProductsUrl, {
             category: 'phone',
             limit: 6
         }, config)
@@ -60,7 +61,7 @@ export const createProductAction = (title, price, description, category) => asyn
             }
         }
 
-        const { data } = await axios.post("http://127.0.0.1:5000/api/product/create", {
+        const { data } = await axios.post(createProductUrl, {
             title, 
             price, 
             description, 
