@@ -9,7 +9,7 @@ import {
     PRODUCT_LIST_SUCCESS 
 } from "../constants/productConstants";
 
-export const productList = (limit) => async (dispatch, getState) => {
+export const productList = (category, limit, skip) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_LIST_REQUEST
@@ -26,13 +26,16 @@ export const productList = (limit) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(findProductsUrl, {
-            category: 'phone',
-            limit: limit
+            category,
+            limit,
+            skip
         }, config)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
-            payload: data
+            payload: data,
+            limit,
+            skip
         })
 
     } catch (error) {
@@ -82,3 +85,16 @@ export const createProductAction = (title, price, description, category, selecte
         })
     }
 }
+
+// export const changePage = (currentPage, limit, skip ) => async (dispatch, getState) => {
+//     try {
+//         dispatch({
+//             type: PRODUCT_LIST_SUCCESS,
+//             payload: data,
+//             limit,
+//             skip
+//         })
+//     } catch (error) {
+        
+//     }
+// }

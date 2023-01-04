@@ -46,7 +46,6 @@ const CreateProduct = () => {
     }
 
     const resizeImage = (base64Str, maxWidth = 400, maxHeight = 350) => {
-        console.log(base64Str)
         return new Promise((resolve) => {
             let img = new Image()
             img.src = base64Str

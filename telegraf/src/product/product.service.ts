@@ -66,6 +66,9 @@ export class ProductService {
 				},
 			},
 			{
+				$skip: dto.skip
+			},
+			{
 				$limit: dto.limit 
 			},
 			{

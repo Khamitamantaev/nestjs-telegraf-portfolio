@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { productList } from '../../actions/productActions'
 import ErrorMessage from '../../components/error/ErrorMessage'
@@ -10,20 +10,21 @@ import './Products.css'
 const Products = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
-    const { products, loading, error } = useSelector((state) => state.productList)
+    const { products, loading, error, skip, limit } = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
 
     const productCreate = useSelector((state) => state.productCreate)
     const { success: successCreate } = productCreate
+    const [currentSkip, setCurrentSkip] = useState(skip)
+    const [currentLimit, setCurrentLimit] = useState(limit)
 
-    
 
     useEffect(() => {
-        dispatch(productList(6))
         if (!userInfo) {
             navigate("/");
         }
-    }, [dispatch, navigate, userInfo, successCreate])
+        dispatch(productList('phone', currentLimit, currentSkip))
+    }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip])
 
     return (
         <main className="page catalog-page">
@@ -85,17 +86,22 @@ const Products = () => {
                             </div>
                             <div className="col-md-9">
                                 <div className="products">
-                                {error && userInfo ? <ErrorMessage variant='danger'>{error}</ErrorMessage>: null}
-                                { loading && <Loading/> }
+                                    {error && userInfo ? <ErrorMessage variant='danger'>{error}</ErrorMessage> : null}
+                                    {loading && <Loading />}
                                     <div className="row no-gutters">
                                         {products ? products.map((pr) => <Product key={pr._id} selectedFile={pr.selectedFile} title={pr.title} price={pr.price} />) : null}
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
-                                            <li className="page-item disabled"><a className="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li className="page-item active"><a className="page-link" href="#">1</a></li>
+                                            <li className="page-item disabled">
+                                                <a className="page-link"  aria-label="Previous">
+                                                    <span aria-hidden="true">«</span>
+                                                </a>
+                                            </li>
+                                    
+                                            {/* 
                                             <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                            <li className="page-item"><a className="page-link" href="#">3</a></li> */}
                                             <li className="page-item"><a className="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                                         </ul>
                                     </nav>

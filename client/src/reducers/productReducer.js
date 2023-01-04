@@ -7,12 +7,17 @@ import {
     PRODUCT_LIST_SUCCESS 
 } from "../constants/productConstants"
 
-export const productListReducer = (state = { products: []}, action) => {
+export const productListReducer = (state = { products: [], skip: 0, limit: 6}, action) => {
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
             return { loading: true }
         case PRODUCT_LIST_SUCCESS:
-            return { loading: false, products: action.payload }
+            return { 
+                loading: false, 
+                products: action.payload, 
+                skip: action.skip, 
+                limit: action.limit,
+            }
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.payload }
         default:
