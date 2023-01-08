@@ -42,6 +42,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./client/src:/usr/src/app/src
+      - ./client/node_modules:/usr/src/app/node_modules
     stdin_open: true
     tty: true
     depends_on:

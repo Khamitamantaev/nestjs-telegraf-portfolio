@@ -12,12 +12,19 @@ const Products = () => {
     const dispatch = useDispatch()
     const { products, loading, error, skip, limit } = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
-
     const productCreate = useSelector((state) => state.productCreate)
     const { success: successCreate } = productCreate
-    const [currentSkip, setCurrentSkip] = useState(skip)
-    const [currentLimit, setCurrentLimit] = useState(limit)
+    const [currentSkip, setCurrentSkip] = useState(0)
+    const [currentLimit, setCurrentLimit] = useState(6)
+    const [isDisable, setIsDisable] = useState(true)
 
+    const skipCountHandler = () => {
+        if (currentSkip <= 0) {
+            setCurrentSkip(0)
+        } else {
+            setCurrentSkip(currentSkip - 6);
+        }
+    };
 
     useEffect(() => {
         if (!userInfo) {
@@ -93,16 +100,16 @@ const Products = () => {
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
-                                            <li className="page-item disabled">
-                                                <a className="page-link"  aria-label="Previous">
+                                            <li className="page-item" onClick={skipCountHandler}>
+                                                <a className="page-link" aria-label="Previous">
                                                     <span aria-hidden="true">«</span>
                                                 </a>
                                             </li>
-                                    
-                                            {/* 
+
+                                            <li className="page-item"><a className="page-link" href="#">1</a></li>
                                             <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                            <li className="page-item"><a className="page-link" href="#">3</a></li> */}
-                                            <li className="page-item"><a className="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                            <li className="page-item"><a className="page-link" onClick={() => setCurrentSkip(state => state + 6)} href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                                         </ul>
                                     </nav>
                                 </div>
