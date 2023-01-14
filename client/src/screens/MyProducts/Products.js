@@ -16,20 +16,23 @@ const Products = () => {
     const { success: successCreate } = productCreate
     const [currentSkip, setCurrentSkip] = useState(0)
     const [currentLimit, setCurrentLimit] = useState(6)
-    const [isDisable, setIsDisable] = useState(true)
+    const [currentPage, setCurrentPage] = useState(1)
 
-    const skipCountHandler = () => {
-        if (currentSkip <= 0) {
-            setCurrentSkip(0)
+
+    const skipCountHandler = (skip) => {
+        if (skip < 0 ) {
+            return
         } else {
-            setCurrentSkip(currentSkip - 6);
+            setCurrentSkip(skip);
         }
-    };
+    }
+
 
     useEffect(() => {
         if (!userInfo) {
             navigate("/");
         }
+        console.log(currentSkip)
         dispatch(productList('phone', currentLimit, currentSkip))
     }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip])
 
@@ -100,16 +103,22 @@ const Products = () => {
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
-                                            <li className="page-item" onClick={skipCountHandler}>
+                                            <li className="page-item" onClick={() => skipCountHandler(currentSkip - 6)}>
                                                 <a className="page-link" aria-label="Previous">
                                                     <span aria-hidden="true">«</span>
                                                 </a>
                                             </li>
-
-                                            <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                            {/* <li className="page-item"><a className="page-link" href="#">1</a></li>
                                             <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                            <li className="page-item"><a className="page-link" href="#">3</a></li>
-                                            <li className="page-item"><a className="page-link" onClick={() => setCurrentSkip(state => state + 6)} href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                            <li className="page-item"><a className="page-link" href="#">3</a></li> */}
+                                            <li className="page-item">
+                                                <a className="page-link" 
+                                                    onClick={() => skipCountHandler(currentSkip + 6)} 
+                                                    href="#" 
+                                                    aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
