@@ -99,6 +99,8 @@ export class ProductService {
 							}
 						}],
 					count: [{
+						$match: { category: dto.category }
+					},{
 						$count: 'count'
 					}]
 				}
