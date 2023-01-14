@@ -109,8 +109,10 @@ const Products = () => {
                                                 <a className="page-link" aria-label="Previous">
                                                     <span aria-hidden="true">«</span>
                                                 </a>
-                                            </li>
-                                            <li className="page-item"><a className="page-link" href="#">{currentPage}</a></li>
+                                            </li> 
+                                            {currentPage - 1 !== 0 ? <li className="page-item"><a className="page-link" href="#">{currentPage - 1}</a></li>: null}
+                                            <li className="page-item active"><a className="page-link" href="#">{currentPage}</a></li>
+                                            <li className="page-item"><a className="page-link" href="#">{currentPage + 1}</a></li>
                                             <li className="page-item">
                                                 <a className="page-link" 
                                                     onClick={() => skipCountHandler(currentSkip + 6)} 
