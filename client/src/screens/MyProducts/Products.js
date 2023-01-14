@@ -10,7 +10,7 @@ import './Products.css'
 const Products = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
-    const { products, loading, error, skip, limit } = useSelector((state) => state.productList)
+    const { products, loading, error, skip, limit, productsLength} = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
     const productCreate = useSelector((state) => state.productCreate)
     const { success: successCreate } = productCreate
@@ -20,7 +20,7 @@ const Products = () => {
 
 
     const skipCountHandler = (skip) => {
-        if (skip < 0 ) {
+        if (skip < 0 || skip/currentLimit >= Math.ceil(productsLength/currentLimit) ) {
             return
         } else {
         // let totalPages = Math.ceil(totalItems / pageSize);
@@ -34,7 +34,7 @@ const Products = () => {
         if (!userInfo) {
             navigate("/");
         }
-        console.log(currentPage)
+        // console.log(Math.ceil(productsLength / 6))
         dispatch(productList('phone', currentLimit, currentSkip))
     }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip])
 
