@@ -18,7 +18,6 @@ const Products = () => {
     const [currentLimit, setCurrentLimit] = useState(6)
     const [currentPage, setCurrentPage] = useState(1)
 
-
     const skipCountHandler = (skip) => {
         if (skip < 0 || skip/currentLimit >= Math.ceil(productsLength/currentLimit) ) {
             return
@@ -105,16 +104,17 @@ const Products = () => {
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
-                                            <li className="page-item" onClick={() => skipCountHandler(currentSkip - 6)}>
-                                                <a className="page-link" aria-label="Previous">
+                                            <li className="page-item"  onClick={() => skipCountHandler(currentSkip - 6)}>
+                                                <a className="page-link" aria-label="Previous" href="#">
                                                     <span aria-hidden="true">«</span>
                                                 </a>
                                             </li> 
                                             {currentPage - 1 !== 0 ? <li className="page-item"><a className="page-link" href="#">{currentPage - 1}</a></li>: null}
                                             <li className="page-item active"><a className="page-link" href="#">{currentPage}</a></li>
                                             <li className="page-item"><a className="page-link" href="#">{currentPage + 1}</a></li>
-                                            <li className="page-item">
+                                            <li className="page-item" href="#">
                                                 <a className="page-link" 
+                                                    href="#"
                                                     onClick={() => skipCountHandler(currentSkip + 6)} 
                                                     aria-label="Next">
                                                         <span aria-hidden="true">»</span>
