@@ -23,7 +23,9 @@ const Products = () => {
         if (skip < 0 ) {
             return
         } else {
+        // let totalPages = Math.ceil(totalItems / pageSize);
             setCurrentSkip(skip);
+            setCurrentPage(skip === 0 ? 1: skip/6 + 1)
         }
     }
 
@@ -32,7 +34,7 @@ const Products = () => {
         if (!userInfo) {
             navigate("/");
         }
-        console.log(currentSkip)
+        console.log(currentPage)
         dispatch(productList('phone', currentLimit, currentSkip))
     }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip])
 
@@ -114,7 +116,6 @@ const Products = () => {
                                             <li className="page-item">
                                                 <a className="page-link" 
                                                     onClick={() => skipCountHandler(currentSkip + 6)} 
-                                                    href="#" 
                                                     aria-label="Next">
                                                         <span aria-hidden="true">»</span>
                                                 </a>
