@@ -34,9 +34,7 @@ const Products = () => {
             setSelectedCategories([...selectedCategories, e.target.value ])
         } else {
             // console.log(filteredData)
-            setSelectedCategories(selectedCategories.filter(function(category) { 
-                return category !== e.target.value 
-            }));
+            setSelectedCategories(selectedCategories.filter((category) => category !== e.target.value));
             console.log(selectedCategories)
         }
         
