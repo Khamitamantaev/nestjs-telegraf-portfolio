@@ -17,6 +17,7 @@ const Products = () => {
     const [currentSkip, setCurrentSkip] = useState(0)
     const [currentLimit, setCurrentLimit] = useState(6)
     const [currentPage, setCurrentPage] = useState(1)
+    const [selectedCategories, setSelectedCategories] = useState([]) 
 
     const skipCountHandler = (skip) => {
         if (skip < 0 || skip/currentLimit >= Math.ceil(productsLength/currentLimit) ) {
@@ -28,14 +29,28 @@ const Products = () => {
         }
     }
 
+    const handleChange = (e) => {
+        if(e.target.checked) {
+            setSelectedCategories([...selectedCategories, e.target.value ])
+        } else {
+            // console.log(filteredData)
+            setSelectedCategories(selectedCategories.filter(function(category) { 
+                return category !== e.target.value 
+            }));
+            console.log(selectedCategories)
+        }
+        
+        // console.log(e.target.value)
+    }
+
 
     useEffect(() => {
         if (!userInfo) {
             navigate("/");
         }
         // console.log(Math.ceil(productsLength / 6))
-        dispatch(productList(['phone','sport'], currentLimit, currentSkip))
-    }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip])
+        dispatch(productList(selectedCategories, currentLimit, currentSkip))
+    }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip, selectedCategories])
 
     return (
         <main className="page catalog-page">
@@ -53,15 +68,15 @@ const Products = () => {
                                         <div className="filter-item">
                                             <h3>Categories</h3>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="formCheck-1" />
+                                                <input className="form-check-input" type="checkbox" id="formCheck-1" value="phone" onChange={handleChange} />
                                                 <label className="form-check-label" htmlFor="formCheck-1">Phones</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="formCheck-2" />
+                                                <input className="form-check-input" type="checkbox" id="formCheck-2" value="computer" onChange={handleChange} />
                                                 <label className="form-check-label" htmlFor="formCheck-2">Computers</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="formCheck-3" />
+                                                <input className="form-check-input" type="checkbox" id="formCheck-3" value="sport" onChange={handleChange} />
                                                 <label className="form-check-label" htmlFor="formCheck-3">Sport</label>
                                             </div>
                                         </div>
