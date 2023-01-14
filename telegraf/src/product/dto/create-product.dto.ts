@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsArray } from 'class-validator';
 
 export class CreateProductDto {
 
@@ -14,6 +14,9 @@ export class CreateProductDto {
 	@IsString()
 	description: string;
    
-	@IsString()
-	category: string;
+	@IsArray()
+	@IsString({
+		each: true
+	})
+	categories: string[];
 }

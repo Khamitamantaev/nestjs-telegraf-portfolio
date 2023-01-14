@@ -17,6 +17,8 @@ export class ProductModel extends TimeStamps {
 	@prop()
 	description: string;
 
-	@prop()
-	category: string;
+	@prop({
+		type: () => [String]
+	})
+	categories: string[];
 }

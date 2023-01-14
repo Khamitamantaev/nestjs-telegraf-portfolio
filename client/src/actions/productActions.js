@@ -9,7 +9,7 @@ import {
     PRODUCT_LIST_SUCCESS 
 } from "../constants/productConstants";
 
-export const productList = (category, limit, skip) => async (dispatch, getState) => {
+export const productList = (categories, limit, skip) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_LIST_REQUEST
@@ -26,7 +26,7 @@ export const productList = (category, limit, skip) => async (dispatch, getState)
         }
 
         const { data } = await axios.post(findProductsUrl, {
-            category,
+            categories,
             limit,
             skip
         }, config)
@@ -36,7 +36,7 @@ export const productList = (category, limit, skip) => async (dispatch, getState)
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: data[0].results,
-            length: data[0].count[0].count,
+            length: data[0].count.length ? data[0].count[0].count: 0,
             limit,
             skip
         })
@@ -50,7 +50,7 @@ export const productList = (category, limit, skip) => async (dispatch, getState)
     }
 }
 
-export const createProductAction = (title, price, description, category, selectedFile) => async (dispatch, getState) => {
+export const createProductAction = (title, price, description, categories, selectedFile) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_CREATE_REQUEST
@@ -71,7 +71,7 @@ export const createProductAction = (title, price, description, category, selecte
             title, 
             price, 
             description, 
-            category,
+            categories,
             selectedFile
         }, config)
 

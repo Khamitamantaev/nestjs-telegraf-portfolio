@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Form from 'react-bootstrap/Form';
+import { Form, Col } from 'react-bootstrap';
 import Loading from '../../components/loading/Loading'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,7 +10,7 @@ const CreateProduct = () => {
 
     const [state, setState] = useState({
         title: "",
-        category: "phone",
+        categories: [],
         price: 0,
         description: "",
         selectedFile: ""
@@ -19,7 +19,7 @@ const CreateProduct = () => {
     const resetHandler = () => {
         setState({
             title: "",
-            category: "",
+            categories: [],
             price: 0,
             description: ""
         })
@@ -35,13 +35,15 @@ const CreateProduct = () => {
         if (!userInfo) {
             navigate("/");
         }
+       
     }, [dispatch, navigate, userInfo])
 
 
     const handleChange = (e) => {
+        console.log(state.categories)
         setState({
             ...state,
-            [e.target.name]: e.target.value
+            [e.target.name] : e.target.name === 'categories' ? state.categories.slice.call(e.target.selectedOptions).map(item => item.value): e.target.value
         });
     }
 
@@ -78,8 +80,8 @@ const CreateProduct = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (!state.title || !state.description || state.price <= 0 || !state.selectedFile) return
-        dispatch(createProductAction(state.title, state.price, state.description, state.category, state.selectedFile))
+        if (!state.title || !state.description || state.price <= 0 || !state.selectedFile || state.categories.length === 0) return
+        dispatch(createProductAction(state.title, state.price, state.description, state.categories, state.selectedFile))
         resetHandler()
         navigate('/products')
     }
@@ -112,7 +114,7 @@ const CreateProduct = () => {
                                                             {loading && <Loading />}
                                                         </div>
                                                         <div className="form-group">
-                                                            <label>Title</label>
+                                                            <Form.Label>Title</Form.Label>
                                                             <input className="form-control"
                                                                 name='title'
                                                                 type="text"
@@ -122,20 +124,17 @@ const CreateProduct = () => {
                                                             />
                                                         </div>
                                                         <div className="form-group">
-                                                            <label>Category</label>
-                                                            <Form.Select
-                                                                name='category'
-                                                                aria-label="Default select example"
-                                                                onChange={handleChange}
-                                                                value={state.category}
-                                                            >
-                                                                <option value="phone">Phone</option>
-                                                                <option value="computer">Computer</option>
-                                                                <option value="sport">Sport</option>
-                                                            </Form.Select>
+                                                            <Form.Label>Categories</Form.Label>
+                                                            <Form.Group as={Col} controlId="my_multiselect_field">
+                                                                <Form.Control name='categories' as="select" multiple value={state.categories} onChange={handleChange}>
+                                                                    <option value="phone">Phone</option>
+                                                                    <option value="computer">Computer</option>
+                                                                    <option value="sport">Sport</option>
+                                                                </Form.Control>
+                                                            </Form.Group>
                                                         </div>
                                                         <div className="form-group">
-                                                            <label>Price</label>
+                                                            <Form.Label>Price</Form.Label>
                                                             <input className="form-control"
                                                                 name='price'
                                                                 type="number"
@@ -144,7 +143,7 @@ const CreateProduct = () => {
                                                             />
                                                         </div>
                                                         <div className="form-group">
-                                                            <label>Description</label>
+                                                            <Form.Label>Description</Form.Label>
                                                             <textarea
                                                                 className="form-control"
                                                                 name="description"
