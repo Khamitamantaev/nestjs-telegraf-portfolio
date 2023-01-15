@@ -65,7 +65,10 @@ const UpdateProduct = () => {
         e.preventDefault()
         if (!state.title || !state.description || state.price <= 0 || !state.selectedFile || state.categories.length === 0) return
         dispatch(updateProductAction(state.title, state.price, state.description, state.categories, state.selectedFile, state._id))
-        navigate('/products')
+        setTimeout(() => {
+            navigate('/products')
+        }, 1200)
+        
     }
 
     return <Product
