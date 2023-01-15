@@ -10,35 +10,30 @@ import './Products.css'
 const Products = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
-    const { products, loading, error, skip, limit, productsLength} = useSelector((state) => state.productList)
+    const { products, loading, error, skip, limit, productsLength } = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
     const productCreate = useSelector((state) => state.productCreate)
     const { success: successCreate } = productCreate
     const [currentSkip, setCurrentSkip] = useState(0)
     const [currentLimit, setCurrentLimit] = useState(6)
     const [currentPage, setCurrentPage] = useState(1)
-    const [selectedCategories, setSelectedCategories] = useState([]) 
+    const [selectedCategories, setSelectedCategories] = useState([])
 
     const skipCountHandler = (skip) => {
-        if (skip < 0 || skip/currentLimit >= Math.ceil(productsLength/currentLimit) ) {
+        if (skip < 0 || skip / currentLimit >= Math.ceil(productsLength / currentLimit)) {
             return
         } else {
-        // let totalPages = Math.ceil(totalItems / pageSize);
             setCurrentSkip(skip);
-            setCurrentPage(skip === 0 ? 1: skip/6 + 1)
+            setCurrentPage(skip === 0 ? 1 : skip / 6 + 1)
         }
     }
 
     const handleChange = (e) => {
-        if(e.target.checked) {
-            setSelectedCategories([...selectedCategories, e.target.value ])
+        if (e.target.checked) {
+            setSelectedCategories([...selectedCategories, e.target.value])
         } else {
-            // console.log(filteredData)
             setSelectedCategories(selectedCategories.filter((category) => category !== e.target.value));
-            console.log(selectedCategories)
         }
-        
-        // console.log(e.target.value)
     }
 
 
@@ -46,7 +41,6 @@ const Products = () => {
         if (!userInfo) {
             navigate("/");
         }
-        // console.log(Math.ceil(productsLength / 6))
         dispatch(productList(selectedCategories, currentLimit, currentSkip))
     }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip, selectedCategories])
 
@@ -125,20 +119,20 @@ const Products = () => {
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
-                                            <li className="page-item"  onClick={() => skipCountHandler(currentSkip - 6)}>
+                                            <li className="page-item" onClick={() => skipCountHandler(currentSkip - 6)}>
                                                 <a className="page-link" aria-label="Previous" href="#">
                                                     <span aria-hidden="true">«</span>
                                                 </a>
-                                            </li> 
-                                            {currentPage - 1 !== 0 ? <li className="page-item"><a className="page-link" href="#">{currentPage - 1}</a></li>: null}
+                                            </li>
+                                            {currentPage - 1 !== 0 ? <li className="page-item"><a className="page-link" href="#">{currentPage - 1}</a></li> : null}
                                             <li className="page-item active"><a className="page-link" href="#">{currentPage}</a></li>
                                             <li className="page-item"><a className="page-link" href="#">{currentPage + 1}</a></li>
                                             <li className="page-item" href="#">
-                                                <a className="page-link" 
+                                                <a className="page-link"
                                                     href="#"
-                                                    onClick={() => skipCountHandler(currentSkip + 6)} 
+                                                    onClick={() => skipCountHandler(currentSkip + 6)}
                                                     aria-label="Next">
-                                                        <span aria-hidden="true">»</span>
+                                                    <span aria-hidden="true">»</span>
                                                 </a>
                                             </li>
                                         </ul>

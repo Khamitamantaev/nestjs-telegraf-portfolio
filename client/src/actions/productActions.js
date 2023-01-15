@@ -31,8 +31,6 @@ export const productList = (categories, limit, skip) => async (dispatch, getStat
             skip
         }, config)
 
-        console.log(data)
-
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: data[0].results,
