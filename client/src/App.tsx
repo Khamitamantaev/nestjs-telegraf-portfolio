@@ -10,6 +10,7 @@ import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import { useSelector } from 'react-redux';
 import AuthLandingPage from './screens/LandingPage/AuthLandingPage';
 import Products from './screens/MyProducts/Products';
+import CreateProduct from './screens/CreateProduct/CreateProduct';
 
 const App = () => {
   const { userInfo } = useSelector((state: { userLogin: { userInfo: { _id: string, email: string, createdAt: string}}})=> state.userLogin)
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<LoginScreen />} />
           <Route path='/register' element={<RegisterScreen />} />
+          <Route path='/createproduct' element={<CreateProduct />} />
         </Routes>
       </main>
       <Footer />

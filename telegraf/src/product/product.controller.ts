@@ -4,7 +4,6 @@ import { PRODUCT_NOT_FOUND } from './product.constants';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDto } from './dto/find-product.dto';
-import { PartialType } from '@nestjs/mapped-types';
 import { 
 	Body, 
 	Controller, 
@@ -19,7 +18,6 @@ import {
 	ValidationPipe, 
 	UseGuards 
 } from '@nestjs/common';
-import { ProductModel } from './model/product.model';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('product')
@@ -51,7 +49,6 @@ export class ProductController {
 		if(!deletedProduct) {
 			throw new NotFoundException(PRODUCT_NOT_FOUND);
 		}
-
 	}
 
 	@UseGuards(JwtAuthGuard)

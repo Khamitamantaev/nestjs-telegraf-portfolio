@@ -1,12 +1,13 @@
 import React from 'react'
+import { Image } from 'react-bootstrap';
 
-const Product = ({ title, price }) => {
+const Product = ({ title, price, selectedFile }) => {
   return (
     <div className="col-12 col-md-6 col-lg-4">
     <div className="clean-product-item">
         <div className="image">
             <a href="#">
-                <img className="img-fluid d-block mx-auto" src="assets/img/tech/image2.jpg" alt='simple' />
+                <img className="img-fluid d-block mx-auto" src={selectedFile} alt='simple' />
             </a>
         </div>
         <div className="product-name"><a href="#">{title}</a></div>

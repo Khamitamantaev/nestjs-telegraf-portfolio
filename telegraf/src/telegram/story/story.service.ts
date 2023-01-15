@@ -5,7 +5,8 @@ import {
   GO, BACK,
   GO_BACK,
   DAVAI,
-  SEE_LATER
+  SEE_LATER,
+  COME_LATER
 } from './../telegram.constants';
 import { Injectable } from '@nestjs/common';
 import {
@@ -47,13 +48,19 @@ export class StoryService {
     @Ctx() ctx: SceneContext & { update: Update.CallbackQueryUpdate }
   ) {
     const jokes = await this.telegramService.findGte18Story({ tag: JOKES_WITH_WOMAN })
-    if (jokes) {
+    if (jokes.length !== 0) {
       const random = Math.floor(Math.random() * jokes.length);
       await ctx.reply(jokes[random].story, {
         reply_markup: {
           keyboard: [
             [{ text: DAVAI }, { text: GO_BACK }],
           ],
+        }
+      });
+    } else {
+      await ctx.reply(COME_LATER, {
+        reply_markup: {
+          remove_keyboard: true
         }
       });
     }

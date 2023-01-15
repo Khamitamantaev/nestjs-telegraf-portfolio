@@ -8,6 +8,7 @@ import {
     USER_REGISTER_SUCCESS 
 } from "../constants/userConstants"
 import axios from 'axios'
+import { authLogin, authRegister } from "../api"
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -17,7 +18,7 @@ export const login = (email, password) => async (dispatch) => {
                 "Content-type": "application/json"
             }
         }
-        const { data } = await axios.post('http://127.0.0.1:5000/api/auth/login', {
+        const { data } = await axios.post(authLogin, {
             login: email,
             password: password
         }, config)
@@ -45,7 +46,8 @@ export const register = (email, password) => async (dispatch) => {
                 "Content-type": "application/json"
             }
         }
-        const { data } = await axios.post('http://127.0.0.1:5000/api/auth/register', {
+        
+        const { data } = await axios.post(authRegister, {
             login: email,
             password: password
         }, config)
