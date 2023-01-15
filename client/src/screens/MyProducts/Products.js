@@ -17,7 +17,7 @@ const Products = () => {
     const [currentSkip, setCurrentSkip] = useState(0)
     const [currentLimit, setCurrentLimit] = useState(6)
     const [currentPage, setCurrentPage] = useState(1)
-    const [selectedCategories, setSelectedCategories] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState(["phone"])
 
     const skipCountHandler = (skip) => {
         // console.log({ "SKIP/CURRENT_LIMIT" : skip/currentLimit, "MATH": Math.ceil(productsLength/currentLimit)})
@@ -63,7 +63,7 @@ const Products = () => {
                                         <div className="filter-item">
                                             <h3>Categories</h3>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="formCheck-1" value="phone" onChange={handleChange} />
+                                                <input className="form-check-input" type="checkbox" defaultChecked="true" id="formCheck-1" value="phone" onChange={handleChange} />
                                                 <label className="form-check-label" htmlFor="formCheck-1">Phones</label>
                                             </div>
                                             <div className="form-check">
@@ -71,7 +71,7 @@ const Products = () => {
                                                 <label className="form-check-label" htmlFor="formCheck-2">Computers</label>
                                             </div>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="formCheck-3" value="sport" onChange={handleChange} />
+                                                <input className="form-check-input" type="checkbox" id="formCheck-3" value="sport"  onChange={handleChange} />
                                                 <label className="form-check-label" htmlFor="formCheck-3">Sport</label>
                                             </div>
                                         </div>
