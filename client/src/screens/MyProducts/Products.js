@@ -20,6 +20,7 @@ const Products = () => {
     const [selectedCategories, setSelectedCategories] = useState([])
 
     const skipCountHandler = (skip) => {
+        console.log({ "SKIP/CURRENT_LIMIT" : skip/currentLimit, "MATH": Math.ceil(productsLength/currentLimit)})
         if (skip < 0 || skip / currentLimit >= Math.ceil(productsLength / currentLimit)) {
             return
         } else {
@@ -41,6 +42,8 @@ const Products = () => {
         if (!userInfo) {
             navigate("/");
         }
+        // console.log('SELECTED:', selectedCategories)
+        // console.log('SKIP: ',currentSkip)
         dispatch(productList(selectedCategories, currentLimit, currentSkip))
     }, [dispatch, navigate, userInfo, successCreate, currentLimit, currentSkip, selectedCategories])
 

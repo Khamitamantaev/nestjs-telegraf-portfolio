@@ -56,12 +56,13 @@ export class ProductService {
 	 * @param id id удаляемого рейтинга в базе
 	 */
 	async findWithReviews(dto: FindProductDto) {
+		console.log(dto)
 		return this.productModel.aggregate([
 			{
 				$facet: {
 					results: [
 						{
-							$match: { categories: dto.categories }
+							$match: { categories: { $in: dto.categories}}
 						},
 						{
 							$sort: {
@@ -97,9 +98,9 @@ export class ProductService {
 									}
 								}
 							}
-						}],
+					}],
 					count: [{
-						$match: { categories: dto.categories }
+						$match: { categories: { $in: dto.categories}}
 					},{
 						$count: 'count'
 					}]
