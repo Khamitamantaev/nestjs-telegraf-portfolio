@@ -6,7 +6,6 @@ import FileBase from 'react-file-base64'
 
 const Product = ({
     title,
-    product,
     submitButton,
     submitHandler,
     handleChange,
@@ -27,11 +26,11 @@ const Product = ({
                         <div className="product-info">
                             <div className="row">
                                 <div className="col-md-6">
-                                    {product ?
-                                        <div className="gallery">
-                                            <div className="sp-wrap">
-                                                <a href="#">
-                                                    <img className="img-fluid d-block mx-auto" src={product.selectedFile} alt='simple' />
+                                    {state._id ?
+                                        <div >
+                                            <div>
+                                                <a>
+                                                    <img className="img-fluid d-block mx-auto" src={state.selectedFile} alt='simple' />
                                                 </a>
                                             </div>
                                         </div>
@@ -57,7 +56,7 @@ const Product = ({
                                                             <input className="form-control"
                                                                 name='title'
                                                                 type="text"
-                                                                value={product ? product.title : state.title}
+                                                                value={state.title}
                                                                 placeholder="Enter the title"
                                                                 onChange={handleChange}
                                                             />
@@ -65,7 +64,7 @@ const Product = ({
                                                         <div className="form-group">
                                                             <Form.Label>Categories</Form.Label>
                                                             <Form.Group as={Col} controlId="my_multiselect_field">
-                                                                <Form.Control name='categories' as="select" multiple value={product ? product.categories : state.categories} onChange={handleChange}>
+                                                                <Form.Control name='categories' as="select" multiple value={state.categories} onChange={handleChange}>
                                                                     <option value="phone">Phone</option>
                                                                     <option value="computer">Computer</option>
                                                                     <option value="sport">Sport</option>
@@ -77,7 +76,7 @@ const Product = ({
                                                             <input className="form-control"
                                                                 name='price'
                                                                 type="number"
-                                                                value={product ? product.price : state.price}
+                                                                value={state.price}
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
@@ -86,7 +85,7 @@ const Product = ({
                                                             <textarea
                                                                 className="form-control"
                                                                 name="description"
-                                                                value={product ? product.description : state.description}
+                                                                value={state.description}
                                                                 onChange={handleChange}
                                                             />
                                                         </div>

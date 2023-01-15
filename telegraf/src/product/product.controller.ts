@@ -16,7 +16,8 @@ import {
 	NotFoundException, 
 	UsePipes, 
 	ValidationPipe, 
-	UseGuards 
+	UseGuards, 
+	Put
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
@@ -52,7 +53,7 @@ export class ProductController {
 	}
 
 	@UseGuards(JwtAuthGuard)
-	@Patch(':id')
+	@Put('update/:id')
 	async patch(@Param('id', IdValidationPipe) id: string, @Body() dto: UpdateProductDto) {
 		const updatedProduct = await this.productService.updateById(id, dto);
 		if(!updatedProduct) {

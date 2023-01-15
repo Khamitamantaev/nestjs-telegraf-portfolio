@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import { createProductAction } from '../../actions/productActions';
-
 import Product from '../../components/product/Product';
-const CreateProduct = () => {
 
+const CreateProduct = () => {
     const [state, setState] = useState({
         title: "",
         categories: [],

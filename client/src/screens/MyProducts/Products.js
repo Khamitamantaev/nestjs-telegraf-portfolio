@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { productList } from '../../actions/productActions'
+import { productList, setCurrentProductAction } from '../../actions/productActions'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import Loading from '../../components/loading/Loading'
 import { useNavigate } from "react-router-dom";
@@ -35,6 +35,12 @@ const Products = () => {
         } else {
             setSelectedCategories(selectedCategories.filter((category) => category !== e.target.value));
         }
+    }
+
+    const handleClick = (product) => {
+        // console.log(product)
+        dispatch(setCurrentProductAction({ ...product}))
+        navigate("/updateproduct");
     }
 
 
@@ -118,7 +124,7 @@ const Products = () => {
                                     {error && userInfo ? <ErrorMessage variant='danger'>{error}</ErrorMessage> : null}
                                     {loading && <Loading />}
                                     <div className="row no-gutters">
-                                        {products ? products.map((pr) => <Product key={pr._id} selectedFile={pr.selectedFile} title={pr.title} price={pr.price} href="/updateproduct" />) : null}
+                                        {products ? products.map((pr) => <Product handleClick={handleClick} key={pr._id} product={pr} />) : null}
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
