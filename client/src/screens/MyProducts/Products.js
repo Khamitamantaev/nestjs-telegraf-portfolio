@@ -118,7 +118,7 @@ const Products = () => {
                                     {error && userInfo ? <ErrorMessage variant='danger'>{error}</ErrorMessage> : null}
                                     {loading && <Loading />}
                                     <div className="row no-gutters">
-                                        {products ? products.map((pr) => <Product key={pr._id} selectedFile={pr.selectedFile} title={pr.title} price={pr.price} />) : null}
+                                        {products ? products.map((pr) => <Product key={pr._id} selectedFile={pr.selectedFile} title={pr.title} price={pr.price} href="/updateproduct" />) : null}
                                     </div>
                                     <nav>
                                         <ul className="pagination fixed-bottom">
