@@ -62,7 +62,7 @@ export class ProductService {
 				$facet: {
 					results: [
 						{
-							$match: { categories: { $in: dto.categories}}
+							$match: { categories: { $in: dto.categories } }
 						},
 						{
 							$sort: {
@@ -74,34 +74,10 @@ export class ProductService {
 						},
 						{
 							$limit: dto.limit
-						},
-						{
-							$lookup: {
-								from: APP_CONSTANTS.COLLECTIONS.REVIEW, // масссив reviews where productId === _id продукта
-								localField: '_id', // _id продукта
-								foreignField: 'productId', // productId review равный localField _id продукта
-								as: 'reviews' // как массив reviews при получении 
-							}
-						},
-						{
-							$addFields: {
-								reviewCount: { $size: '$reviews' }, // количество найденных элементо в массиве reviews
-								reviewAvg: { $avg: '$reviews.rating' }, // рассчитывает средний рейтинг всех ревью в массиве reviews
-								reviews: {
-									$function: {
-										body: `function(reviews) {
-												reviews.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
-												return reviews
-											}`,
-										args: ['$reviews'], // массив аргументов переданных функции для выполнения
-										lang: 'js'
-									}
-								}
-							}
-					}],
+						}],
 					count: [{
-						$match: { categories: { $in: dto.categories}}
-					},{
+						$match: { categories: { $in: dto.categories } }
+					}, {
 						$count: 'count'
 					}]
 				}
