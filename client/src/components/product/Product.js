@@ -27,11 +27,21 @@ const Product = ({
                             <div className="row">
                                 <div className="col-md-6">
                                     {state._id ?
-                                        <div >
+                                        <div style={ { textAlign: 'center'}}>
                                             <div>
                                                 <a>
+
                                                     <img className="img-fluid d-block mx-auto" src={state.selectedFile} alt='simple' />
                                                 </a>
+                                               
+                                            </div>
+                                            <div style={{ display: 'inline-block'}}>
+                                            <FileBase
+                                                    
+                                                    type="file"
+                                                    multiple={false}
+                                                    onDone={async ({ base64 }) => setState({ ...state, selectedFile: await resize(base64, 300, 400) })}
+                                                />
                                             </div>
                                         </div>
                                         :
