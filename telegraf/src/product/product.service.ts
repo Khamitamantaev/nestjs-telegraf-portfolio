@@ -56,7 +56,7 @@ export class ProductService {
 	 * @param id id удаляемого рейтинга в базе
 	 */
 	async findWithReviews(dto: FindProductDto) {
-		console.log(dto)
+		// console.log(dto)
 		return this.productModel.aggregate([
 			{
 				$facet: {
