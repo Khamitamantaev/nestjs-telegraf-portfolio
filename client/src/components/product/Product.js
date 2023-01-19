@@ -3,18 +3,24 @@ import { Form, Col } from 'react-bootstrap';
 import Loading from '../../components/loading/Loading'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import FileBase from 'react-file-base64'
-
+import SimpleModal from '../modal/Modal'
 const Product = ({
     title,
     submitButton,
     submitHandler,
+    handleDeleteSubmit,
     handleChange,
     error,
     loading,
     resize,
     state,
-    setState
+    setState,
+    show,
+    handleClose,
+    handleShow
 }) => {
+
+
     return (
         <main className="page product-page">
             <section className="clean-block clean-product dark">
@@ -27,17 +33,16 @@ const Product = ({
                             <div className="row">
                                 <div className="col-md-6">
                                     {state._id ?
-                                        <div style={ { textAlign: 'center'}}>
+                                        <div style={{ textAlign: 'center' }}>
                                             <div>
                                                 <a>
-
                                                     <img className="img-fluid d-block mx-auto" src={state.selectedFile} alt='simple' />
                                                 </a>
-                                               
+
                                             </div>
-                                            <div style={{ display: 'inline-block'}}>
-                                            <FileBase
-                                                    
+                                            <div style={{ display: 'inline-block' }}>
+                                                <FileBase
+
                                                     type="file"
                                                     multiple={false}
                                                     onDone={async ({ base64 }) => setState({ ...state, selectedFile: await resize(base64, 300, 400) })}
@@ -51,6 +56,7 @@ const Product = ({
                                             onDone={async ({ base64 }) => setState({ ...state, selectedFile: await resize(base64, 300, 400) })}
                                         />}
                                 </div>
+
                                 <div className="col-md-6">
                                     <div className="info">
                                         <main className="page contact-us-page">
@@ -107,12 +113,32 @@ const Product = ({
                                                                 {submitButton}
                                                             </button>
                                                         </div>
+
+
                                                     </form>
+                                                    <button
+                                        className="btn btn-danger btn-block"
+                                        onClick={handleShow}
+                                    >
+                                        Delete Product
+                                    </button>
                                                 </div>
+                                                
                                             </section>
                                         </main>
 
                                     </div>
+                                </div>
+                                <div>
+                    
+                                    <SimpleModal
+                                        show={show}
+                                        submitButtonText="Delete"
+                                        handleSubmit={handleDeleteSubmit} 
+                                        headingText="Delete Product"
+                                        questionText="You shure delete this product?"
+                                        handleClose={handleClose}
+                                    />
                                 </div>
                             </div>
                         </div>

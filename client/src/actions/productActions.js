@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createProductUrl, findProductsUrl, updateProductUrl } from "../api";
+import { createProductUrl, deleteProductUrl, findProductsUrl, updateProductUrl } from "../api";
 import { 
     PRODUCT_CREATE_FAIL,
     PRODUCT_CREATE_REQUEST,
@@ -7,6 +7,9 @@ import {
     PRODUCT_CURRENT_FAIL,
     PRODUCT_CURRENT_REQUEST,
     PRODUCT_CURRENT_SUCCESS,
+    PRODUCT_DELETE_FAIL,
+    PRODUCT_DELETE_REQUEST,
+    PRODUCT_DELETE_SUCCESS,
     PRODUCT_LIST_FAIL, 
     PRODUCT_LIST_REQUEST, 
     PRODUCT_LIST_SUCCESS, 
@@ -148,6 +151,39 @@ export const setCurrentProductAction = (product) => async (dispatch, getState) =
     } catch (error) {
         dispatch({
             type: PRODUCT_CURRENT_FAIL,
+            payload: error.response && error.response.data.message 
+                ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const deleteProductAction = (_id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: PRODUCT_DELETE_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo: { token } }
+        } = getState()
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token.accessToken}`
+            }
+        }
+
+        const { data } = await axios.delete(deleteProductUrl + '/' + _id, config)
+
+        dispatch({
+            type: PRODUCT_DELETE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_DELETE_FAIL,
             payload: error.response && error.response.data.message 
                 ? error.response.data.message : error.message
         })

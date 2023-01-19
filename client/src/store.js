@@ -5,6 +5,7 @@ import { userLoginReducer, userRegisterReducer } from './reducers/userReducer'
 import { 
     currentProductReducer, 
     productCreateReducer, 
+    productDeleteReducer, 
     productListReducer, 
     productUpdateReducer 
 } from './reducers/productReducer'
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     productList: productListReducer,
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
-    currentProduct: currentProductReducer
+    currentProduct: currentProductReducer,
+    productDelete: productDeleteReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')? JSON.parse(localStorage.getItem('userInfo')):null

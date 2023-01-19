@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import {  updateProductAction } from '../../actions/productActions';
+import {  deleteProductAction, updateProductAction } from '../../actions/productActions';
 import Product from '../../components/product/Product';
 
 const UpdateProduct = () => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const product = useSelector((state) => state.currentProduct.product)
-   
     const [state, setState] = useState(product)
 
     let navigate = useNavigate();
@@ -22,12 +24,19 @@ const UpdateProduct = () => {
         }
     }, [dispatch, navigate, userInfo])
 
-
     const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.name === 'categories' ? state.categories.slice.call(e.target.selectedOptions).map(item => item.value) : e.target.value
         });
+    }
+
+    const handleDeleteSubmit = (e) => {
+        e.preventDefault()
+        dispatch(deleteProductAction(state._id))
+        setTimeout(() => {
+            navigate('/products')
+        }, 900)
     }
 
     const resizeImage = (base64Str, maxWidth = 400, maxHeight = 350) => {
@@ -67,7 +76,7 @@ const UpdateProduct = () => {
         dispatch(updateProductAction(state.title, state.price, state.description, state.categories, state.selectedFile, state._id))
         setTimeout(() => {
             navigate('/products')
-        }, 1200)
+        }, 900)
         
     }
 
@@ -78,9 +87,13 @@ const UpdateProduct = () => {
         loading={loading}
         resize={resizeImage}
         setState={setState}
+        handleDeleteSubmit={handleDeleteSubmit}
         submitButton="Update"
         submitHandler={submitHandler}
         title="Update Product"
+        handleClose={handleClose}
+        handleShow={handleShow}
+        show={show}
     />
 }
 

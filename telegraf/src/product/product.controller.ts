@@ -44,7 +44,7 @@ export class ProductController {
 	}
 
 	@UseGuards(JwtAuthGuard)
-	@Delete(':id')
+	@Delete('delete/:id')
 	async delete(@Param('id', IdValidationPipe) id: string) {
 		const deletedProduct = await this.productService.deleteById(id);
 		if(!deletedProduct) {
