@@ -15,7 +15,7 @@ const MyProducts = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(productList())
+    dispatch(productList(6))
     if(!userInfo) {
         navigate("/");
     }

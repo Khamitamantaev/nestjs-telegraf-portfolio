@@ -4,7 +4,6 @@ import { PRODUCT_NOT_FOUND } from './product.constants';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDto } from './dto/find-product.dto';
-import { PartialType } from '@nestjs/mapped-types';
 import { 
 	Body, 
 	Controller, 
@@ -17,9 +16,9 @@ import {
 	NotFoundException, 
 	UsePipes, 
 	ValidationPipe, 
-	UseGuards 
+	UseGuards, 
+	Put
 } from '@nestjs/common';
-import { ProductModel } from './model/product.model';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('product')
@@ -45,17 +44,16 @@ export class ProductController {
 	}
 
 	@UseGuards(JwtAuthGuard)
-	@Delete(':id')
+	@Delete('delete/:id')
 	async delete(@Param('id', IdValidationPipe) id: string) {
 		const deletedProduct = await this.productService.deleteById(id);
 		if(!deletedProduct) {
 			throw new NotFoundException(PRODUCT_NOT_FOUND);
 		}
-
 	}
 
 	@UseGuards(JwtAuthGuard)
-	@Patch(':id')
+	@Put('update/:id')
 	async patch(@Param('id', IdValidationPipe) id: string, @Body() dto: UpdateProductDto) {
 		const updatedProduct = await this.productService.updateById(id, dto);
 		if(!updatedProduct) {

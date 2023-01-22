@@ -2,13 +2,23 @@ import { configureStore, combineReducers, applyMiddleware  } from '@reduxjs/tool
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducer'
-import { productListReducer } from './reducers/productReducer'
+import { 
+    currentProductReducer, 
+    productCreateReducer, 
+    productDeleteReducer, 
+    productListReducer, 
+    productUpdateReducer 
+} from './reducers/productReducer'
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
 const rootReducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
-    productList: productListReducer
+    productList: productListReducer,
+    productCreate: productCreateReducer,
+    productUpdate: productUpdateReducer,
+    currentProduct: currentProductReducer,
+    productDelete: productDeleteReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')? JSON.parse(localStorage.getItem('userInfo')):null
