@@ -1,16 +1,15 @@
-import React from 'react'
-import { Image } from 'react-bootstrap';
+import React, { useEffect } from 'react'
 
-const Product = ({ title, price, selectedFile }) => {
+const Product = ({product,  handleClick }) => {
   return (
     <div className="col-12 col-md-6 col-lg-4">
     <div className="clean-product-item">
         <div className="image">
-            <a href="#">
-                <img className="img-fluid d-block mx-auto" src={selectedFile} alt='simple' />
+            <a onClick={()  => handleClick({...product})}>
+                <img className="img-fluid d-block mx-auto" src={product.selectedFile} alt='simple'  />
             </a>
         </div>
-        <div className="product-name"><a href="#">{title}</a></div>
+        <div className="product-name"><a href="#">{product.title}</a></div>
         <div className="about">
             <div className="rating">
                 <img src="assets/img/star.svg"  alt='star'/>
@@ -20,7 +19,7 @@ const Product = ({ title, price, selectedFile }) => {
                 <img src="assets/img/star-empty.svg" alt='star'/>
             </div>
             <div className="price">
-                <h3>${price}</h3>
+                <h3>${product.price}</h3>
             </div>
         </div>
     </div>
