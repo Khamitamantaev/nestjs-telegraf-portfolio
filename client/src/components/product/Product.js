@@ -19,8 +19,6 @@ const Product = ({
     handleClose,
     handleShow
 }) => {
-
-
     return (
         <main className="page product-page">
             <section className="clean-block clean-product dark">
@@ -56,7 +54,6 @@ const Product = ({
                                             onDone={async ({ base64 }) => setState({ ...state, selectedFile: await resize(base64, 300, 400) })}
                                         />}
                                 </div>
-
                                 <div className="col-md-6">
                                     <div className="info">
                                         <main className="page contact-us-page">
@@ -113,8 +110,6 @@ const Product = ({
                                                                 {submitButton}
                                                             </button>
                                                         </div>
-
-
                                                     </form>
                                                     <button
                                         className="btn btn-danger btn-block"
@@ -126,7 +121,6 @@ const Product = ({
                                                 
                                             </section>
                                         </main>
-
                                     </div>
                                 </div>
                                 <div>
