@@ -17,7 +17,9 @@ const Product = ({
     setState,
     show,
     handleClose,
-    handleShow
+    handleShow,
+    setShowToast,
+    showToast
 }) => {
     return (
         <main className="page product-page">
@@ -112,23 +114,22 @@ const Product = ({
                                                         </div>
                                                     </form>
                                                     <button
-                                        className="btn btn-danger btn-block"
-                                        onClick={handleShow}
-                                    >
-                                        Delete Product
-                                    </button>
+                                                        className="btn btn-danger btn-block"
+                                                        onClick={handleShow}
+                                                    >
+                                                        Delete Product
+                                                    </button>
                                                 </div>
-                                                
+
                                             </section>
                                         </main>
                                     </div>
                                 </div>
-                                <div>
-                    
+                                <div>    
                                     <SimpleModal
                                         show={show}
                                         submitButtonText="Delete"
-                                        handleSubmit={handleDeleteSubmit} 
+                                        handleSubmit={handleDeleteSubmit}
                                         headingText="Delete Product"
                                         questionText="You shure delete this product?"
                                         handleClose={handleClose}

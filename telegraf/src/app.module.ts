@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -11,6 +11,7 @@ import { GetMongoConfiguration } from './configs/mongo.config';
 import { FilesModule } from './files/files.module';
 import { TelegramModule } from './telegram/telegram.module';
 import config from './configs/configuration'
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -21,6 +22,12 @@ import config from './configs/configuration'
   		imports: [ConfigModule],
   		inject: [ConfigService],
   		useFactory: GetMongoConfiguration
+	}),
+	CacheModule.register({
+		isGlobal: true,
+		store: redisStore,
+		host: process.env.REDIS_HOST,
+      	port: process.env.REDIS_PORT,
 	}),
 	AuthModule,
 	ReviewModule,

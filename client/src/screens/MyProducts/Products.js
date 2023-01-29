@@ -10,7 +10,7 @@ import './Products.css'
 const Products = () => {
     let navigate = useNavigate();
     const dispatch = useDispatch()
-    const { products, loading, error, skip, limit, productsLength } = useSelector((state) => state.productList)
+    const { products, loading, error, productsLength } = useSelector((state) => state.productList)
     const { userInfo } = useSelector((state) => state.userLogin)
     const productCreate = useSelector((state) => state.productCreate)
     const { success: successCreate } = productCreate
@@ -39,7 +39,7 @@ const Products = () => {
 
     const handleClick = (product) => {
         // console.log(product)
-        dispatch(setCurrentProductAction({ ...product}))
+        dispatch(setCurrentProductAction(product))
         navigate("/updateproduct");
     }
 

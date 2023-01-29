@@ -9,7 +9,6 @@ import {
 	Controller, 
 	Post, 
 	Get, 
-	Patch, 
 	Delete, 
 	Param, 
 	HttpCode, 
@@ -17,7 +16,11 @@ import {
 	UsePipes, 
 	ValidationPipe, 
 	UseGuards, 
-	Put
+	Put,
+	CacheInterceptor,
+	UseInterceptors,
+	CacheTTL,
+	CacheKey
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 
@@ -62,6 +65,9 @@ export class ProductController {
 		return updatedProduct;
 	}
 
+	// @UseInterceptors(CacheInterceptor)
+	// @CacheKey('product-key')
+	// @CacheTTL(30)
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Post('find')

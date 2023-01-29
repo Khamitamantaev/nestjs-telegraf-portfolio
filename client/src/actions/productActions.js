@@ -128,6 +128,8 @@ export const updateProductAction = (title, price, description, categories, selec
             payload: data
         })
 
+        localStorage.setItem('currentProduct', JSON.stringify(data))
+
     } catch (error) {
         dispatch({
             type: PRODUCT_UPDATE_FAIL,
@@ -147,7 +149,7 @@ export const setCurrentProductAction = (product) => async (dispatch, getState) =
             type: PRODUCT_CURRENT_SUCCESS,
             payload: product
         })
-
+        localStorage.setItem('currentProduct', JSON.stringify(product))
     } catch (error) {
         dispatch({
             type: PRODUCT_CURRENT_FAIL,
@@ -180,6 +182,8 @@ export const deleteProductAction = (_id) => async (dispatch, getState) => {
             type: PRODUCT_DELETE_SUCCESS,
             payload: data
         })
+
+        localStorage.removeItem('currentProduct')
 
     } catch (error) {
         dispatch({

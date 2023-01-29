@@ -1,0 +1,33 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    env_file:
+      - ./telegraf/development.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - 27017:27017
+    volumes:
+      - ./telegraf/mongo-dev:/data/db
+    command: --wiredTigerCacheSizeGB 2.5
+  redis:
+    container_name: cache
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    volumes:
+      - ./telegraf/redis:/data
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+        - redis
+volumes:
+  redis:
+    driver: local
