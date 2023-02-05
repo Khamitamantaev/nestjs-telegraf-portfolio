@@ -29,6 +29,7 @@ services:
       - 5000:5001
     depends_on:
       - mongo
+      - redis
   client:
     build:
       dockerfile: Dockerfile
@@ -43,3 +44,21 @@ services:
     restart: always
     depends_on:
       - api
+  redis:
+    container_name: product-cache
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    volumes:
+      - ./telegraf/redis:/data
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+        - redis
+volumes:
+  redis:
+    driver: local  

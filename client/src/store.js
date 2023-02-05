@@ -22,9 +22,11 @@ const rootReducer = combineReducers({
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')? JSON.parse(localStorage.getItem('userInfo')):null
+const currentProductFromStorage = localStorage.getItem('currentProduct')? JSON.parse(localStorage.getItem('currentProduct')):null
 
 const initialState = {
-    userLogin: { userInfo: userInfoFromStorage }
+    userLogin: { userInfo: userInfoFromStorage },
+    currentProduct: { product: currentProductFromStorage } 
 }
 
 const store = configureStore(
