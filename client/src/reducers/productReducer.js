@@ -61,7 +61,7 @@ export const productUpdateReducer = (state = {}, action) => {
     }
 }
 
-export const currentProductReducer = (state = { product: {}}, action) => {
+export const currentProductReducer = (state = {}, action) => {
     switch (action.type) {
         case PRODUCT_CURRENT_REQUEST:
             return { loading: true }

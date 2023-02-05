@@ -3,21 +3,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import {  deleteProductAction, updateProductAction } from '../../actions/productActions';
 import Product from '../../components/product/Product';
-
 const UpdateProduct = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const product = useSelector((state) => state.currentProduct.product)
+    const {product} = useSelector((state) => state.currentProduct)
     const [state, setState] = useState(product)
-
     let navigate = useNavigate();
     const dispatch = useDispatch()
     const productUpdate = useSelector((state) => state.productUpdate)
     const { userInfo } = useSelector((state) => state.userLogin)
     const { loading, error } = productUpdate
-
     useEffect(() => {
         if (!userInfo) {
             navigate("/");
@@ -34,9 +31,6 @@ const UpdateProduct = () => {
     const handleDeleteSubmit = (e) => {
         e.preventDefault()
         dispatch(deleteProductAction(state._id))
-        setTimeout(() => {
-            navigate('/products')
-        }, 900)
     }
 
     const resizeImage = (base64Str, maxWidth = 400, maxHeight = 350) => {
@@ -74,9 +68,6 @@ const UpdateProduct = () => {
         e.preventDefault()
         if (!state.title || !state.description || state.price <= 0 || !state.selectedFile || state.categories.length === 0) return
         dispatch(updateProductAction(state.title, state.price, state.description, state.categories, state.selectedFile, state._id))
-        setTimeout(() => {
-            navigate('/products')
-        }, 900)
         
     }
 

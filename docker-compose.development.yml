@@ -30,6 +30,7 @@ services:
       - 5000:5002
     depends_on:
       - mongodb
+      - redis
   client-dev:
     build:
       dockerfile: Dockerfile
@@ -47,7 +48,24 @@ services:
     tty: true
     depends_on:
       - api-dev
-    
+  redis:
+    container_name: cache
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    volumes:
+      - ./telegraf/redis:/data
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+        - redis
+volumes:
+  redis:
+    driver: local  
     
     
     
